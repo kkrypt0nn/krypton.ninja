@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"/>
+    <meta name="theme-color" content="#9C84EF">
+    
+    <meta name="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/Banner.webp">
+    <meta name="og:image:width" content="1000">
+    <meta name="og:image:height" content="420">
+    <meta name="description" content="The Space Heroes 2022 CTF was an online CTF from April 1st (4pm UTC) to April 3rd (9pm UTC) 2022. It was hosted by FITSEC  and it even was their first time organizing such an event! Lots of applause">
+<meta property="og:type" content="article">
+<meta property="og:title" content="🚀 Space Heroes 2022 CTF write-up">
+<meta property="og:url" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/index.html">
+<meta property="og:site_name" content="Krypton">
+<meta property="og:description" content="The Space Heroes 2022 CTF was an online CTF from April 1st (4pm UTC) to April 3rd (9pm UTC) 2022. It was hosted by FITSEC  and it even was their first time organizing such an event! Lots of applause">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/Banner.webp">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/Sticker.jpg">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/discord.png">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/crash.png">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/fgets.png">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/gdb.png">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/printf.png">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/string_format.png">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/curiosity.png">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/launched.jpg">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/payload.png">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/grid.png">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/r2d2.png">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/gobuster.png">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/spacebuds.jpg">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/hacker.png">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/cookies.png">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/mudbud.png">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/reload.png">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/space_captain_garfield.png">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/garfield.png">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/strange.png">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/qwerty.png">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/shuttle.jpg">
+<meta property="og:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/newspaper.jpg">
+<meta property="article:published_time" content="2022-04-03T16:51:13.000Z">
+<meta property="article:modified_time" content="2022-07-29T17:44:59.717Z">
+<meta property="article:author" content="Krypton">
+<meta property="article:tag" content="ctf">
+<meta property="article:tag" content="write-up">
+<meta property="article:tag" content="space heroes">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/Banner.webp">
+    
+    
+    
+    
+        
+            
+                
+                    <link rel="shortcut icon" href="https://www.gravatar.com/avatar/b15cc9bf5e4b3090dd8d77b7c907718d?s=48">
+                
+            
+        
+        
+            
+                
+                    <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/b15cc9bf5e4b3090dd8d77b7c907718d?s=192" sizes="192x192">
+                
+            
+        
+        
+            
+                
+                    <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/b15cc9bf5e4b3090dd8d77b7c907718d?s=180">
+                
+            
+        
+    
+    <!-- title -->
+    <title>🚀 Space Heroes 2022 CTF write-up</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+        <link rel="alternate" href="/atom.xml" title="Krypton" type="application/atom+xml"/>
+    
+    <!-- mathjax -->
+    
+        <script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+
+        </script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML'
+                async></script>
+    
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+
+    <div id="header-post">
+    <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 },
+    'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+    <span id="menu">
+    <span id="nav">
+      <ul>
+          
+              <li><a href="/">~/</a></li>
+          
+              <li><a href="/about/">~/about</a></li>
+          
+              <li><a href="/archives/">~/posts</a></li>
+          
+              <li><a href="/supporters/">~/supporters</a></li>
+          
+              <li><a href="/ctfs/">~/ctfs</a></li>
+          
+              <li><a href="/search/">~/search</a></li>
+          
+              <li><a href="/atom.xml">~/rss</a></li>
+          
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+          
+          
+              <li><a class="icon" aria-label="Next post " href="/2022/03/28/Insomnihack-2022-CTF-write-up/"><i
+                              class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                              onmouseout="$('#i-next').toggle();"></i></a></li>
+          
+          <li><a class="icon" aria-label="Back to top " href="#"
+                 onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up"
+                                                                                 aria-hidden="true"
+                                                                                 onmouseover="$('#i-top').toggle();"
+                                                                                 onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt"
+                                                                                      aria-hidden="true"
+                                                                                      onmouseover="$('#i-share').toggle();"
+                                                                                      onmouseout="$('#i-share').toggle();"
+                                                                                      onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://www.facebook.com/sharer.php?u=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/"><i
+                    class="fab fa-facebook " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/&text=🚀 Space Heroes 2022 CTF write-up"><i
+                    class="fab fa-twitter " aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://www.linkedin.com/shareArticle?url=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/&title=🚀 Space Heroes 2022 CTF write-up"><i
+                    class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/&is_video=false&description=🚀 Space Heroes 2022 CTF write-up"><i
+                    class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+    <li><a class="icon" href="mailto:?subject=🚀 Space Heroes 2022 CTF write-up&body=Check out this article: https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/"><i
+                    class="fas fa-envelope " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/&title=🚀 Space Heroes 2022 CTF write-up"><i
+                    class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://reddit.com/submit?url=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/&title=🚀 Space Heroes 2022 CTF write-up"><i
+                    class="fab fa-reddit " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://www.stumbleupon.com/submit?url=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/&title=🚀 Space Heroes 2022 CTF write-up"><i
+                    class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://digg.com/submit?url=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/&title=🚀 Space Heroes 2022 CTF write-up"><i
+                    class="fab fa-digg " aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://www.tumblr.com/share/link?url=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/&name=🚀 Space Heroes 2022 CTF write-up&description="><i
+                    class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/&t=🚀 Space Heroes 2022 CTF write-up"><i
+                    class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%86%97-k"><span class="toc-number">1.</span> <span class="toc-text">🆗 k?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%AC-Discord"><span class="toc-number">2.</span> <span class="toc-text">💬 Discord</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9B%A1%EF%B8%8F-Guardians-of-the-Galaxy"><span class="toc-number">3.</span> <span class="toc-text">🛡️ Guardians of the Galaxy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%91%E2%80%8D%F0%9F%9A%80-Space-traveler"><span class="toc-number">4.</span> <span class="toc-text">🧑‍🚀 Space traveler</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%95%B5%EF%B8%8F%E2%80%8D%E2%99%82%EF%B8%8F-Curious"><span class="toc-number">5.</span> <span class="toc-text">🕵️‍♂️ Curious?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%80-Launched"><span class="toc-number">6.</span> <span class="toc-text">🚀 Launched</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%8C-Flag-in-space"><span class="toc-number">7.</span> <span class="toc-text">🌌 Flag in space</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A4%96-R2D2"><span class="toc-number">8.</span> <span class="toc-text">🤖 R2D2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%9F-Starman"><span class="toc-number">9.</span> <span class="toc-text">🌟 Starman</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%90%95-Space-Buds"><span class="toc-number">10.</span> <span class="toc-text">🐕 Space Buds</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9B%B0%EF%B8%8F-Cape-Kennedy"><span class="toc-number">11.</span> <span class="toc-text">🛰️ Cape Kennedy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%AD%90-Star-Pcap"><span class="toc-number">12.</span> <span class="toc-text">⭐ Star Pcap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%91%81%EF%B8%8F%E2%80%8D%F0%9F%97%A8%EF%B8%8F-Mysterious-Broadcast"><span class="toc-number">13.</span> <span class="toc-text">👁️‍🗨️ Mysterious Broadcast</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%90%88-Space-Captain-Garfield"><span class="toc-number">14.</span> <span class="toc-text">🐈 Space Captain Garfield</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%A9-Netflix-and-CTF"><span class="toc-number">15.</span> <span class="toc-text">🚩 Netflix and CTF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%A6-Strange-Traffic"><span class="toc-number">16.</span> <span class="toc-text">🚦 Strange Traffic</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%AE-Future-Stego"><span class="toc-number">17.</span> <span class="toc-text">🔮 Future Stego</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+
+<div class="content index py4">
+    
+    <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
+    <header>
+        
+    <h1 class="posttitle" itemprop="name headline">
+        🚀 Space Heroes 2022 CTF write-up
+    </h1>
+
+
+
+            <div class="meta">
+                <span class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                
+                    
+                        <div class="author-logo" style="background-image: url(https://www.gravatar.com/avatar/b15cc9bf5e4b3090dd8d77b7c907718d);"></div>
+                    
+                
+                <span id="name" itemprop="name">
+                    <a href="/">Krypton</a>
+                </span>
+                </span> @
+                
+    <div class="postdate">
+        
+            <time datetime="2022-04-03T16:51:13.000Z"
+                  itemprop="datePublished">April 03, 2022</time>
+            
+        
+    </div>
+
+
+                    <div>
+    <i class="fas fa-clock"></i>
+    27 min. read | 
+                            <i class="fas fa-eye"></i>
+    <span id="views">1337 views</span>
+</div>
+                            
+
+                                
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/ctf/" rel="tag">ctf</a>, <a class="tag-link-link" href="/tags/space-heroes/" rel="tag">space heroes</a>, <a class="tag-link-link" href="/tags/write-up/" rel="tag">write-up</a>
+    </div>
+
+
+            </div>
+    </header>
+    
+
+        <div class="content" itemprop="articleBody">
+            <img src="Banner.webp" />
+
+<p>The Space Heroes 2022 CTF was an online CTF from April 1st (4pm UTC) to April 3rd (9pm UTC) 2022. It was hosted by <a target="_blank" rel="noopener" href="https://ctftime.org/team/65296">FITSEC </a> and it even was their first time organizing such an event! Lots of applause to them for their hard work 👏 As a newbie CTF player, there were lots of challenges to have fun on and to successfully solve. This of course will improve my experience with CTFs and get me even more motivated to do more. The entire CTF was space themed, which made me even more motivated since I love space :D<br>I’ve solved much more challenges compared to the <a href="https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/">Insomni’hack 2022 CTF</a>, one reason is that there was more time; and also that some challenges were much more easier. This was an overall awesome CTF, especially for me as a newbie. I’ve learned a lot and hope to participate in their future CTFs!</p>
+<p>The CTF ran another competition after the CTF ended where we were able to submit our write-ups and the best seven write-ups would get an <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/International_Space_Station">ISS</a> sticker signed by <a target="_blank" rel="noopener" href="https://nasa.gov/astronauts/biographies/andrew-r-morgan/biography/">US Astronaut Colonel Andrew Morgan</a>. I ended up being in the winners and got my sticker after some time:</p>
+<img alt="Very original type of post-CTF competition" src="Sticker.jpg"><span class="image-caption">Very original type of post-CTF competition</span>
+
+<p>So now let’s start the write-up - as always, all flags had the same format which was <code>shctf&#123;...&#125;</code>. Let’s get right into the write-up:</p>
+<h2 id="🆗-k"><a href="#🆗-k" class="headerlink" title="🆗 k?"></a>🆗 k?</h2><p>This was a warm up challenge. The description said:</p>
+<blockquote>
+<p>MEE6 was busted! Help us out and unlock the flag in #mee6…</p>
+</blockquote>
+<p>So here it’s pretty obvious, let’s head over to <code>#mee6</code> on their Discord server and see what we can try out. When using the <code>/help commands</code> commaannd, you can see a list of custom commands made by the Discord server administrators. There was a command that looked interesting: <code>!k (optional text) - An awesome command!</code>.<br>When typing <code>!k</code> you will get the flag sent in your private messages by the bot: <code>k? shctf&#123;WhY_iS_K_BaNnEd&#125;  😭</code>. Free points for that one!</p>
+<h2 id="💬-Discord"><a href="#💬-Discord" class="headerlink" title="💬 Discord"></a>💬 Discord</h2><p>Another challenge on Discord, this time the flag was hidden <em>somewhere</em> in the Discord server. I’ve seen lots of people trying random things in the <code>#mee6</code> channel to get that flag while it said <em>somewhere</em>. So I’ve used the search function to search for some flags; nothing. I looked at every channel topic and pinned messages; nothing alarming. But when I went back on the <code>#mee6</code> channel, I clicked on MEE6’s profile; and there it was. MEE6 had a custom role named: <code>shctf&#123;4ut0b0ts_r013_0u7&#125;</code>.</p>
+<img alt="Evil MEE6..." src="discord.png" /><span class="image-caption">Evil MEE6...</span>
+
+<h2 id="🛡️-Guardians-of-the-Galaxy"><a href="#🛡️-Guardians-of-the-Galaxy" class="headerlink" title="🛡️ Guardians of the Galaxy"></a>🛡️ Guardians of the Galaxy</h2><p>We are given a netcat connection and the binary of the program (<a href="files/guardians.bin">Download here</a>). When testing the program locally it crashes, but why? Let’s investigate by opening the file in a disassembler.</p>
+<img alt="The crash source" src="crash.png" ><span class="image-caption">The crash source</span>
+
+<p>This is the source of the crash, and it’s really easy to understand. If <code>fopen</code> returns <code>0x0</code>, then the file doesn’t exist, and therefore the binary crashes. So let’s create a dummy <code>flag.txt</code> file with the content <code>FLAG_____FLAG</code>. But before running the binary again, we can see that the data for the file is stored at the location <code>rbp-0x30</code> with a size of <code>0x20</code>.</p>
+<img alt="Calling convention matters" src="fgets.png"><span class="image-caption">Calling convention matters</span>
+
+<p>To confirm that, we can run the file with gdb and check the content:</p>
+<img alt="Confirmed" src="gdb.png" /><span class="image-caption">Confirmed</span>
+
+<p>The binary prints <strong>exactly</strong> what we send with <code>printf</code> according to this assembly code:</p>
+<img alt="Our text is repeated" src="printf.png" /><span class="image-caption">Our text is repeated</span>
+
+<p>So let’s use some string formats such as <code>%x</code> or others. When using <code>%p</code> we get a nice hexadecimal representation of the address returned. So let’s print lots of them.</p>
+<img alt="Spam, spam, spam..." src="string_format.png" /><span class="image-caption">Spam, spam, spam...</span>
+
+<p>When looking at the data being given back, we can see some hexadecimal values of ASCII characters. Starting at <code>0x6d697b6674636873</code> and ending at <code>0x55f6d2000a7d</code>. So let’s write a Python script to extract that data:</p>
+<figure class="highlight python"><figcaption><span>Guardians of the Galaxy solver</span><a target="_blank" rel="noopener" href="https://gist.github.com/kkrypt0nn/7bda0bc626c9ca5f0d127a8fcabdaa1c">guardians_of_the_galaxy.py</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Useless data:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">0x7ffd7417b6f0</span></span><br><span class="line"><span class="string">0x55f6d353b2a0</span></span><br><span class="line"><span class="string">0x2570257025702570</span></span><br><span class="line"><span class="string">0x2570257025702570</span></span><br><span class="line"><span class="string">0x2570257025702570</span></span><br><span class="line"><span class="string">0x70257025702570</span></span><br><span class="line"><span class="string">---------------</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Important data:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">0x6d697b6674636873</span></span><br><span class="line"><span class="string">0x636172747369645f</span></span><br><span class="line"><span class="string">0x756f795f676e6974</span></span><br><span class="line"><span class="string">0x55f6d2000a7d</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> binascii <span class="keyword">import</span> unhexlify</span><br><span class="line"></span><br><span class="line">flag = <span class="string">b&quot;&quot;</span>.join(</span><br><span class="line">    [</span><br><span class="line">        unhexlify(<span class="string">&quot;6d697b6674636873&quot;</span>)[::-<span class="number">1</span>],</span><br><span class="line">        unhexlify(<span class="string">&quot;636172747369645f&quot;</span>)[::-<span class="number">1</span>],</span><br><span class="line">        unhexlify(<span class="string">&quot;756f795f676e6974&quot;</span>)[::-<span class="number">1</span>],</span><br><span class="line">        unhexlify(<span class="string">&quot;55f6d2000a7d&quot;</span>)[::-<span class="number">1</span>],</span><br><span class="line">    ]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<p>This gave back: <code>b'shctf&#123;im_distracting_you&#125;\n\x00\xd2\xf6U'</code>, and there we have the flag, <code>shctf&#123;im_distracting_you&#125;</code>.</p>
+<h2 id="🧑‍🚀-Space-traveler"><a href="#🧑‍🚀-Space-traveler" class="headerlink" title="🧑‍🚀 Space traveler"></a>🧑‍🚀 Space traveler</h2><p>We were given a URL: <code>https://spaceheroes-web-explore.chals.io</code>. When going on the website we could hit the <code>Guess The Flag</code> button. We had to give a flag as input and it would say if it’s valid or not. Looking at the network tab in the developers tool, not external requests were made. So the check is done locally. When looking at the source code there was some obfuscated source:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _0xb645 = [<span class="string">&quot;\x47\x75\x65\x73\x73\x20\x54\x68\x65\x20\x46\x6C\x61\x67&quot;</span>, <span class="string">&quot;\x73\x68\x63\x74\x66\x7B\x66\x6C\x61\x67\x7D&quot;</span>, <span class="string">&quot;\x59\x6F\x75\x20\x67\x75\x65\x73\x73\x65\x64\x20\x72\x69\x67\x68\x74\x2E&quot;</span>, <span class="string">&quot;\x73\x68\x63\x74\x66\x7B\x65\x69\x67\x68\x74\x79\x5F\x73\x65\x76\x65\x6E\x5F\x74\x68\x6F\x75\x73\x61\x6E\x64\x5F\x6D\x69\x6C\x6C\x69\x6F\x6E\x5F\x73\x75\x6E\x73\x7D&quot;</span>, <span class="string">&quot;\x59\x6F\x75\x20\x67\x75\x65\x73\x73\x65\x64\x20\x77\x72\x6F\x6E\x67\x2E&quot;</span>, <span class="string">&quot;\x69\x6E\x6E\x65\x72\x48\x54\x4D\x4C&quot;</span>, <span class="string">&quot;\x64\x65\x6D\x6F&quot;</span>, <span class="string">&quot;\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">myFunction</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> _0xb729x2;</span><br><span class="line">    <span class="keyword">let</span> _0xb729x3 = <span class="title function_">prompt</span>(_0xb645[<span class="number">0</span>], _0xb645[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">switch</span> (_0xb729x3) &#123;</span><br><span class="line">        <span class="keyword">case</span> _0xb645[<span class="number">3</span>]:</span><br><span class="line">            _0xb729x2 = _0xb645[<span class="number">2</span>];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="attr">default</span>:</span><br><span class="line">            _0xb729x2 = _0xb645[<span class="number">4</span>]</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="variable language_">document</span>[_0xb645[<span class="number">7</span>]](_0xb645[<span class="number">6</span>])[_0xb645[<span class="number">5</span>]] = _0xb729x2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>When looking at it, we can see it’s obfuscated, so let’s <a target="_blank" rel="noopener" href="https://deobfuscate.io/">deobfuscate it</a>!</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">myFunction</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> azante;</span><br><span class="line">  <span class="keyword">let</span> karynna = <span class="title function_">prompt</span>(<span class="string">&quot;Guess The Flag&quot;</span>, <span class="string">&quot;shctf&#123;flag&#125;&quot;</span>);</span><br><span class="line">  <span class="keyword">switch</span> (karynna) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;shctf&#123;eighty_seven_thousand_million_suns&#125;&quot;</span>:</span><br><span class="line">      azante = <span class="string">&quot;You guessed right.&quot;</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="attr">default</span>:</span><br><span class="line">      azante = <span class="string">&quot;You guessed wrong.&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  ;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;demo&quot;</span>).<span class="property">innerHTML</span> = azante;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Well, that’s much more readable and we can see the flag in plaintext: <code>shctf&#123;eighty_seven_thousand_million_suns&#125;</code>.</p>
+<h2 id="🕵️‍♂️-Curious"><a href="#🕵️‍♂️-Curious" class="headerlink" title="🕵️‍♂️ Curious?"></a>🕵️‍♂️ Curious?</h2><p>This challenge was pretty straight forward, it was an OSINT challenge. For this one is was basically <em>“Who can search better on Google?”</em>. Well in my case, I used <a target="_blank" rel="noopener" href="https://tineye.com/">TinEye</a> since we were given a picture:</p>
+<img alt="Isn't Curiosity amazing?" src="curiosity.png" /><span class="image-caption">Isn't Curiosity amazing?</span>
+
+<p>When searching for that picture, there were some websites that had this picture. Here is a list of them:<br><del><a target="_blank" rel="noopener" href="http://www.dailytechinfo.org/tags/%C7%E0%E4%E5%F0%E6%EA%E0/">http://www.dailytechinfo.org/tags/%C7%E0%E4%E5%F0%E6%EA%E0/</a></del> - Russian, nothing important for the challenge<br><del><a target="_blank" rel="noopener" href="https://dailytechinfo.org/space/5613-marsohod-curiosity-napolovinu-preodolel-voznikshee-pered-nim-prepyatstvie.html">https://dailytechinfo.org/space/5613-marsohod-curiosity-napolovinu-preodolel-voznikshee-pered-nim-prepyatstvie.html</a></del> - Russian, nothing important for the challenge<br><del><a target="_blank" rel="noopener" href="http://news.discovery.com/space/the-moment-when-curiosity-breached-a-mars-dune-140205.htm">http://news.discovery.com/space/the-moment-when-curiosity-breached-a-mars-dune-140205.htm</a></del> - Offline<br><a target="_blank" rel="noopener" href="https://www.hjkc.de/_blog/2014/02/05/2391-mars-curiosity-chroniken---curiosity-news-sol-529-533/">https://www.hjkc.de/_blog/2014/02/05/2391-mars-curiosity-chroniken---curiosity-news-sol-529-533/</a> - Could be interesting<br><a target="_blank" rel="noopener" href="https://www.space.com/24592-mars-rover-curiosity-dune-jump.html">https://www.space.com/24592-mars-rover-curiosity-dune-jump.html</a> - Could be interesting</p>
+<p>When looking at the last result, it clearly has as title <em>“The Moment When Curiosity Breached a Mars Dune”</em>. Considering the flag format was given, <code>shctf&#123;SOL_xxx&#125;</code>, we can see that this picture was taken at SOL 533. So pretty simple, right? <code>shctf&#123;SOL_533&#125;</code> is the flag.<br>The other website, hjkc.de also contained the SOL 533 picture, you just have to scroll <em>a lot</em>.</p>
+<h2 id="🚀-Launched"><a href="#🚀-Launched" class="headerlink" title="🚀 Launched"></a>🚀 Launched</h2><p>Another OSINT challenge, this time we are given the picture of a rocket that just launched.</p>
+<img alt="Just awesome to see that.." src="launched.jpg" width="50%" /><span class="image-caption">Just awesome to see that..</span>
+
+<p>Considering the flag format was <code>shctf&#123;rocket_payload&#125;</code>, it’s pretty easy to know we need to find the rocket and its payload name. It’s also the first time I know payloads can have names 🤯<br>So let’s get <em>exiftool</em> in my hands. When looking at the data we got back, we can see some interesting information:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ExifTool Version Number         : 12.40</span><br><span class="line">File Name                       : launched.jpg</span><br><span class="line">...</span><br><span class="line">Date/Time Original              : 2019:04:11 18:36:33</span><br><span class="line">Create Date                     : 2019:04:11 18:36:33</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>One of them being the exact date and time when the picture was taken. So we can see that the rocket was launched at <code>2019:04:11 18:36:33</code>. Just need to find the rocket name and its payload now.<br>A simple Google search showed that the rocket was a <a target="_blank" rel="noopener" href="https://www.cnbc.com/2019/04/11/livestream-watch-spacex-falcon-heavy-rocket-launch-and-landing.html">Falcon Heavy</a>. Now we need the payload name; let’s try <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Falcon_Heavy#Launches_and_payloads">Wikipedia</a>. Yup, there we go:</p>
+<img alt="Interesting that payloads have names..." src="payload.png" /><span class="image-caption">Interesting that payloads have names...</span>
+
+<p>So now let’s put everything in the flag format, <code>shctf&#123;rocket_payload&#125;</code>, and we get <code>shctf&#123;falcon_heavy_arabsat-6A&#125;</code>.</p>
+<h2 id="🌌-Flag-in-space"><a href="#🌌-Flag-in-space" class="headerlink" title="🌌 Flag in space"></a>🌌 Flag in space</h2><p>A web challenge. We are greeted with a website that has a grid with empty content. We URL was <a target="_blank" rel="noopener" href="http://172.105.154.14/?flag=">http://172.105.154.14/?flag=</a>, so let’s try to put some garbage in the GET parameter. When trying some characters you can see that some grids now contain the character that was correct, so if you put the <code>flag</code> parameter to <code>shctf&#123;aaa</code>, you get the following:</p>
+<img alt="The flag is not encoded, phew" src="grid.png" /><span class="image-caption">The flag is not encoded, phew</span>
+
+<p>Looking at the source code it’s a basic <code>&lt;div&gt;s&lt;/div&gt;</code> for every character. We could try each character ourselves but some flags are known to have special characters or numbers so it would take ages. Therefore I made a simple script that appends every character, and if it gets the <code>&lt;div&gt;</code> element, then it gets added in a variable <code>res</code>. I’ve already put the known characters as an element in the <code>res</code> variable.<br>Then we simply make a request with all the characters from <code>res</code> and append the currently looped character. Here is my source code, you might understand it better:</p>
+<figure class="highlight python"><figcaption><span>Flag in space</span><a target="_blank" rel="noopener" href="https://gist.github.com/kkrypt0nn/6bc38756350cb3d7443b3cea831831fd">flag_in_space.py</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">flag = [<span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&#125;&quot;</span>]</span><br><span class="line">res = [<span class="string">&quot;s&quot;</span>, <span class="string">&quot;h&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;t&quot;</span>, <span class="string">&quot;f&quot;</span>, <span class="string">&quot;&#123;&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(flag)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span> (<span class="number">0x21</span>, <span class="number">0x7d</span>):</span><br><span class="line">        char = <span class="built_in">chr</span>(j)</span><br><span class="line">        url = <span class="string">&quot;http://172.105.154.14/?flag=&quot;</span> + <span class="string">&quot;&quot;</span>.join(res) + char</span><br><span class="line">        r = requests.get(url)</span><br><span class="line">        response = <span class="string">&quot;&quot;</span>.join(r.text.split())</span><br><span class="line">        previous = <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(res)):</span><br><span class="line">            previous += <span class="string">&quot;&lt;div&gt;&quot;</span> + res[k] + <span class="string">&quot;&lt;/div&gt;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">f&quot;<span class="subst">&#123;previous&#125;</span>&lt;div&gt;<span class="subst">&#123;char&#125;</span>&lt;/div&gt;&quot;</span> <span class="keyword">in</span> response:</span><br><span class="line">            res += char</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;&quot;</span>.join(res), end=<span class="string">&quot;\r&quot;</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;&quot;</span>.join(res))</span><br></pre></td></tr></table></figure>
+<p>After quite some time, the script gives the following flag back: <code>shctf&#123;2_explor3_fronti3r&#125;</code>.</p>
+<h2 id="🤖-R2D2"><a href="#🤖-R2D2" class="headerlink" title="🤖 R2D2"></a>🤖 R2D2</h2><p>Looking back at this one, it was pretty obvious… We are greeted on a website that looks like that:</p>
+<img alt="I personally don't like Star Wars :D" src="r2d2.png" /><span class="image-caption">I personally don't like Star Wars :D</span>
+
+<p>Looking at the source code, nothing. Looking at the local storage, nothing. Looking at the cookies, nothing. I decided to run <em>gobuster</em> on the website with a <a target="_blank" rel="noopener" href="https://github.com/kkrypt0nn/Wordlists/blob/master/directory_scanner/common.txt">wordlist</a>. Guess what kind of file was detected… <strong>robots.txt</strong>, of course……</p>
+<img alt="This shows my lack of experience" src="gobuster.png" /><span class="image-caption">This shows my lack of experience</span>
+
+<p>Getting on that file gives the flag back, <code>shctf&#123;th1s-aster0id-1<span>$</span>-n0t-3ntir3ly-stable&#125;</code>.</p>
+<h2 id="🌟-Starman"><a href="#🌟-Starman" class="headerlink" title="🌟 Starman"></a>🌟 Starman</h2><p>Another OSINT challenge. This time the description says already a lot:</p>
+<blockquote>
+<p>How far away from earth was the space car on January, 20 2021 at 1515 UTC? Enter distance in terms of Million Km. (Rounded to two decimals) (e.g shctf{12.34})</p>
+</blockquote>
+<p>Searching up on Google what the <em>space car</em> is, I came across <a target="_blank" rel="noopener" href="https://theskylive.com/roadster-info">this website</a>. And at the right we can give a date and time, and we get an <a target="_blank" rel="noopener" href="https://theskylive.com/planetarium?obj=roadster&date=2021-01-20&h=15&m=15">awesome map</a>. When looking at the map we see that it was at <code>56.68</code> million km away from earth. Therefore the flag was: <code>shctf&#123;56.68&#125;</code>.</p>
+<h2 id="🐕-Space-Buds"><a href="#🐕-Space-Buds" class="headerlink" title="🐕 Space Buds"></a>🐕 Space Buds</h2><blockquote>
+<p>One of the puppies got into the web server. Can you help find out who it was?</p>
+</blockquote>
+<p>With that description there also was a picture of the Space Buds.</p>
+<img alt="Cute dogs :)" src="spacebuds.jpg" width="50%" /><span class="image-caption">Cute dogs :)</span>
+
+<p>There also was a website, that pretty much contained <em>nothing</em>. But when inspecting the source code, there was a hidden input element.</p>
+<img alt="The background is horrible" src="hacker.png" /><span class="image-caption">The background is horrible</span>
+
+<p>So I searched up on the Internet what the names of the puppies were and put them one by one in the input field. But still nothing. However, when sending the form, there was a request made to <code>/getcookie</code>. So maybe there’s something in my cookies?</p>
+<img alt="Nothing big. Right?" src="cookies.png" /><span class="image-caption">Nothing big. Right?</span>
+
+<p>But we can <strong>change</strong> the value of that cookie, so let’s put the name of each dog in the cookie and reload the page. When typing <em>Mudbud</em>, there was a flag given. </p>
+<img alt="Please next time put some better quality" src="mudbud.png" /><span class="image-caption">Please next time put some better quality</span>
+
+<p>After literally <em>decrypting</em> that flag, it results to <code>shctf&#123;tastes_like_raspberries&#125;</code>.</p>
+<h2 id="🛰️-Cape-Kennedy"><a href="#🛰️-Cape-Kennedy" class="headerlink" title="🛰️ Cape Kennedy"></a>🛰️ Cape Kennedy</h2><p>This was a reversing challenge. We were given a Python file that contains a password check.</p>
+<figure class="highlight python"><figcaption><span>Cape Kennedy reverse</span><a target="_blank" rel="noopener" href="https://gist.github.com/kkrypt0nn/67cfbf20500b9452fd5d6ff4573369ff">cape_kennedy.py</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">  <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) != <span class="number">2</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Invalid args&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">  password = sys.argv[<span class="number">1</span>]</span><br><span class="line">  builder = <span class="number">0</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> c <span class="keyword">in</span> password:</span><br><span class="line">    builder += <span class="built_in">ord</span>(c)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> builder == <span class="number">713</span> <span class="keyword">and</span> <span class="built_in">len</span>(password) == <span class="number">8</span> <span class="keyword">and</span> (<span class="built_in">ord</span>(password[<span class="number">2</span>]) == <span class="built_in">ord</span>(password[<span class="number">5</span>])):</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">ord</span>(password[<span class="number">3</span>]) == <span class="built_in">ord</span>(password[<span class="number">4</span>])) <span class="keyword">and</span> ((<span class="built_in">ord</span>(password[<span class="number">6</span>])) == <span class="built_in">ord</span>(password[<span class="number">7</span>])):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;correct&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;incorrect&quot;</span>)</span><br><span class="line">  <span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;incorrect&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">  main()</span><br></pre></td></tr></table></figure>
+<p>This one was quite easy to reverse. The password must have a length of 8. The characters and index 2 and 5 must be the same, the characters at index 3 and 4 must be the same and the characters and index 6 and 7 must be the same. The sum of the hexadecimal value of the characters must be 713.<br>Let’s make a bruteforce script:</p>
+<figure class="highlight python"><figcaption><span>Cape Kennedy bruteforce</span><a target="_blank" rel="noopener" href="https://gist.github.com/kkrypt0nn/0d4f658978524fb3a7c77e2395ca341f">cape_kennedy_bruteforce.py</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> string <span class="keyword">import</span> ascii_letters</span><br><span class="line"></span><br><span class="line">pwds = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">solve</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        s = [<span class="string">&quot;A&quot;</span>]*<span class="number">8</span></span><br><span class="line">        s[<span class="number">0</span>] = random.choice(ascii_letters)</span><br><span class="line">        s[<span class="number">1</span>] = random.choice(ascii_letters)</span><br><span class="line">        s[<span class="number">2</span>] = random.choice(ascii_letters)</span><br><span class="line">        s[<span class="number">5</span>] = s[<span class="number">2</span>]</span><br><span class="line">        s[<span class="number">3</span>] = random.choice(ascii_letters)</span><br><span class="line">        s[<span class="number">4</span>] = s[<span class="number">3</span>]</span><br><span class="line">        s[<span class="number">6</span>] = random.choice(ascii_letters)</span><br><span class="line">        s[<span class="number">7</span>] = s[<span class="number">6</span>]</span><br><span class="line">        builder = <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        password = <span class="string">&quot;&quot;</span>.join(s)</span><br><span class="line">  </span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> password:</span><br><span class="line">            builder += <span class="built_in">ord</span>(c)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (builder == <span class="number">713</span> <span class="keyword">and</span> <span class="built_in">len</span>(password) == <span class="number">8</span> <span class="keyword">and</span> (<span class="built_in">ord</span>(password[<span class="number">2</span>]) == <span class="built_in">ord</span>(password[<span class="number">5</span>]))):</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">ord</span>(password[<span class="number">3</span>]) == <span class="built_in">ord</span>(password[<span class="number">4</span>])) <span class="keyword">and</span> ((<span class="built_in">ord</span>(password[<span class="number">6</span>])) == <span class="built_in">ord</span>(password[<span class="number">7</span>])):</span><br><span class="line">                <span class="keyword">if</span> password <span class="keyword">not</span> <span class="keyword">in</span> pwds:</span><br><span class="line">                    pwds.append(password)</span><br><span class="line">                    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;moon.txt&quot;</span>, <span class="string">&quot;a&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                        f.write(password + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">solve()</span><br></pre></td></tr></table></figure>
+<p>And yes, there was <strong>A LOT</strong> of valid passwords, over 3 millions.<br>Considering it was space themed (It was mentioned in the description of the challenge again.), I searched what happened at Cape Kennedy and that was related to the moon, since the file was named <code>moon.py</code>. It didn’t took long until I’ve found that Apollo 11 started from there, a historic moment in space exploration! Looking at the results in <code>moon.txt</code> I’ve found a string generated that was <code>APOllOaa</code>. So with the knowledge of before and that valid string, the flag is simply <code>shctf&#123;Apollo11&#125;</code>.</p>
+<h2 id="⭐-Star-Pcap"><a href="#⭐-Star-Pcap" class="headerlink" title="⭐ Star Pcap"></a>⭐ Star Pcap</h2><p>There was no description, just a pcap file (<a href="files/star.pcap">Download here</a>). When opening the file with Wireshark, we can see that there is just one slight change in all those ICMP packets, which is the ICMP code.<br>Using <code>pyshark</code> it was easy to put all these codes together, convert them to an decimal value and then to a character.</p>
+<figure class="highlight python"><figcaption><span>Star Pcap solver</span><a target="_blank" rel="noopener" href="https://gist.github.com/kkrypt0nn/adb3595e2ec5bbfd991724fae1cec68f">star.py</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pyshark</span><br><span class="line"></span><br><span class="line">capture = pyshark.FileCapture(<span class="string">&quot;star.pcap&quot;</span>)</span><br><span class="line">data = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> packet <span class="keyword">in</span> capture:</span><br><span class="line">    data += <span class="built_in">chr</span>(<span class="built_in">int</span>(packet.layers[<span class="number">2</span>]._all_fields[<span class="string">&quot;icmp.code&quot;</span>]))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(data)</span><br></pre></td></tr></table></figure>
+
+<p>This resulted in the following string: <code>c2hjdGZ7TDBnMWMtaSQtdGgzLWJlZ2lOTmluZy0wZi13aSRkb019</code>. Typical for CTFs, the data is base64 encoded. After decoding it, we can get the flag: <code>shctf&#123;L0g1c-i<span>$</span>-th3-begiNNing-0f-wi<span>$</span>doM&#125;</code>.</p>
+<h2 id="👁️‍🗨️-Mysterious-Broadcast"><a href="#👁️‍🗨️-Mysterious-Broadcast" class="headerlink" title="👁️‍🗨️ Mysterious Broadcast"></a>👁️‍🗨️ Mysterious Broadcast</h2><p>Another web challenge.</p>
+<blockquote>
+<p>There used to be 8 Models of humanoid cylon but now there are only 7. We’ve located one of their broadcast nodes but we can’t decode it. Are you able to decipher their technologies?</p>
+</blockquote>
+<p>When going on the website, there is a random ID generated in the URL, it looks like this: <a target="_blank" rel="noopener" href="http://173.230.134.127/seq/710a1f63-57b9-4b86-a880-f413418375d9">http://173.230.134.127/seq/710a1f63-57b9-4b86-a880-f413418375d9</a><br>The website had nothing besides an <code>~</code> as response, interesting. When reloading; it turned to a 1, when reloading again; it didn’t changed. But when reloading for the third time, it turned to a 0. Here is how it looked like:</p>
+<img alt="You probably don't want to write one by one" src="reload.png" /><span class="image-caption">You probably don't want to write one by one</span>
+
+<p><strong>Binary!</strong> But I don’t want to write everything down as it might be a lot of 0’s and 1’s in the end, so let’s make a quick Python script and save the output in a variable:</p>
+<figure class="highlight python"><figcaption><span>Mysterious Broadcast data gatherer</span><a target="_blank" rel="noopener" href="https://gist.github.com/kkrypt0nn/9ff087bc8fb5036231062a634d0211c2">mysterious_broadcast.py</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">binary = <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    r = requests.get(<span class="string">&quot;http://173.230.134.127/seq/710a1f63-57b9-4b86-a880-f413418375d9&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> (r.text == <span class="string">&quot;~&quot;</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    binary += r.text</span><br><span class="line">    <span class="built_in">print</span>(binary)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\n[+] Received: &quot;</span> + binary)</span><br><span class="line"><span class="comment"># 1100011011001011010001101010110010010001111011010011011110100011011000100111011010101100001101011111011001001010110001101100001000101011001110100011101101110110001100001010101011001110100101101000110001011011011010010110100011000111101101101001001110011000011110011101111010111101</span></span><br></pre></td></tr></table></figure>
+<p>Here we go, we got the binary and now we can just decode it.</p>
+<p><code>ÆËF¬í7£bv¬5öJÆÂ+:;v0ªÎ[ihÇ¶yÞ½</code> ehhh, I don’t think that’s correct 🤔 Let’s look at the description again - <code>There used to be *8* Models of humanoid cylon but now there are only *7*. [...]</code>. Remember, when representing a character, for example <strong>A</strong>, in binary there are <strong>8</strong> 1’s or 0’s such as <code>01000001</code>. And according to the description, there are now only <strong>7</strong>. So let’s put a space every 7th character and decode that.<br>Most of the decoders give the same output, as they don’t take in consideration the space. But <a target="_blank" rel="noopener" href="https://rapidtables.com/convert/number/binary-to-ascii.html">this one</a> did take in consideration the space. It resulted in <code>c2hjdGZ7QXNjaWlJc0E3Qml0U3RhbmRhcmR9Cg==</code>. Again, the <code>==</code> is typical for base64 encoding. So let’s decode it: <code>shctf&#123;AsciiIsA7BitStandard&#125;</code>.</p>
+<h2 id="🐈-Space-Captain-Garfield"><a href="#🐈-Space-Captain-Garfield" class="headerlink" title="🐈 Space Captain Garfield"></a>🐈 Space Captain Garfield</h2><p>This one was more about OSINT at the beginning. We have the following picture:</p>
+<img alt="What on Earth is that..." src="space_captain_garfield.png" /><span class="image-caption">What on Earth is that...</span>
+
+<p>There was just the number <code>2254</code> not <em>encrypted</em>. So by searching <code>garfield dreaming 2254</code> on Google I’ve found this picture:</p>
+<img alt="The fun is coming..." src="garfield.png" /><span class="image-caption">The fun is coming...</span>
+
+<p>So yes, what had to be done was to map each character to its sign and then reconstruct the flag in the last picture. I started and got <code>shctf&#123;lasa..alo.er&#125;</code>, after some guessing for the last ones it was <code>shctf&#123;lasagnalover&#125;</code>.</p>
+<h2 id="🚩-Netflix-and-CTF"><a href="#🚩-Netflix-and-CTF" class="headerlink" title="🚩 Netflix and CTF"></a>🚩 Netflix and CTF</h2><p>This one was very similar to the Star Pcap challenge above. We are given a pcap file (<a href="files/netflix-and-ctf.pcap">Download here</a>) and we have to analyze it. When looking at it, there is always request made to <code>http://10.10.100.124:8060/keypress/Lit_X</code> where <code>X</code> always varies. Sometimes there is a request made to <code>/browse</code>, this puts a line between the keypresses, and show names.<br>So let’s make a Python script using <em>tshark</em> again and save the output of each show in a list:</p>
+<figure class="highlight python"><figcaption><span>Netflix and CTF data gatherer</span><a target="_blank" rel="noopener" href="https://gist.github.com/kkrypt0nn/aa1b77498c73f841c9e7ddcb25f15a9b">netflix_and_ctf.py</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pyshark</span><br><span class="line"><span class="keyword">import</span> urllib.parse</span><br><span class="line"></span><br><span class="line">capture = pyshark.FileCapture(<span class="string">&quot;netflix-and-ctf.pcap&quot;</span>)</span><br><span class="line">data = []</span><br><span class="line"></span><br><span class="line">show_data = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> packet <span class="keyword">in</span> capture:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;browse&quot;</span> <span class="keyword">in</span> packet.layers[<span class="number">3</span>]._all_fields[<span class="string">&quot;http.response_for.uri&quot;</span>]:</span><br><span class="line">            data.append(show_data)</span><br><span class="line">            show_data = <span class="string">&quot;&quot;</span></span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        show_data += urllib.parse.unquote(packet.layers[<span class="number">3</span>]._all_fields[<span class="string">&quot;http.response_for.uri&quot;</span>].replace(<span class="string">&quot;http://10.10.100.124:8060/keypress/Lit_&quot;</span>, <span class="string">&quot;&quot;</span>))</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> show <span class="keyword">in</span> data:</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;shctf&quot;</span> <span class="keyword">in</span> show:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Special show found: <span class="subst">&#123;show&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<p>The special show found was: <code>shctf&#123;T1m3-is-th3-ultimat3-curr3Ncy&#125;</code>.</p>
+<h2 id="🚦-Strange-Traffic"><a href="#🚦-Strange-Traffic" class="headerlink" title="🚦 Strange Traffic"></a>🚦 Strange Traffic</h2><p>My favorite forensics challenge. We were given again a pcap file (<a href="files/strangetraffic.pcap">Download here</a>). There also was a free hint, so let’s take it:</p>
+<blockquote>
+<p>Hint: alt,esc,1,2,3,4,5,6,7,8,9,0,-,&#x3D;,backspace,tab,q,w,…</p>
+</blockquote>
+<p>All right, now let’s investigate the pcap file.</p>
+<img alt="Only UDP packets, this one will be easy." src="strange.png" /><span class="image-caption">Only UDP packets, this one will be easy.</span>
+
+<p>The number encircled in purple is the only number that changes and appears in all packets. So we need to get this value for each packet. For this example, the <code>35</code> is formed thanks to the <code>33</code> and <code>35</code> which if decoded to in the ASCII table, they are <code>3</code> and <code>5</code>. Now with <code>35</code> what can we do? Let’s look at the hint again. It’s clearly a keyboard layout. Now if we look at the query keyboard layout that was sent on Discord:</p>
+<img alt="I've never used such a keyboard" src="qwerty.png" /><span class="image-caption">I've never used such a keyboard</span>
+
+<p>If we start counting each key and count up to <code>35</code>, we get the key <code>s</code>, which could fit for the <code>s</code> in the <code>shctf&#123;...&#125;</code> format. After checking with the other packets, this theory is right. Now let’s code a script for that:</p>
+<figure class="highlight python"><figcaption><span>Strange Traffic decoder</span><a target="_blank" rel="noopener" href="https://gist.github.com/kkrypt0nn/a616bab5b17ec8533dac4036fe855a56">strange_traffic.py</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pyshark, binascii</span><br><span class="line"></span><br><span class="line">capture = pyshark.FileCapture(<span class="string">&quot;strangetraffic.pcap&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Map the entire keyboard</span></span><br><span class="line"><span class="built_in">map</span> = &#123;</span><br><span class="line">    <span class="string">&quot;1&quot;</span>: <span class="string">&quot;`&quot;</span>,</span><br><span class="line">    <span class="string">&quot;2&quot;</span>: <span class="string">&quot;1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;3&quot;</span>: <span class="string">&quot;2&quot;</span>,</span><br><span class="line">    <span class="string">&quot;4&quot;</span>: <span class="string">&quot;3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;5&quot;</span>: <span class="string">&quot;4&quot;</span>,</span><br><span class="line">    <span class="string">&quot;6&quot;</span>: <span class="string">&quot;5&quot;</span>,</span><br><span class="line">    <span class="string">&quot;7&quot;</span>: <span class="string">&quot;6&quot;</span>,</span><br><span class="line">    <span class="string">&quot;8&quot;</span>: <span class="string">&quot;7&quot;</span>,</span><br><span class="line">    <span class="string">&quot;9&quot;</span>: <span class="string">&quot;8&quot;</span>,</span><br><span class="line">    <span class="string">&quot;10&quot;</span>: <span class="string">&quot;9&quot;</span>,</span><br><span class="line">    <span class="string">&quot;11&quot;</span>: <span class="string">&quot;0&quot;</span>,</span><br><span class="line">    <span class="string">&quot;12&quot;</span>: <span class="string">&quot;-&quot;</span>,</span><br><span class="line">    <span class="string">&quot;13&quot;</span>: <span class="string">&quot;=&quot;</span>,</span><br><span class="line">    <span class="string">&quot;14&quot;</span>: <span class="string">&quot;&lt;-&quot;</span>,</span><br><span class="line">    <span class="string">&quot;15&quot;</span>: <span class="string">&quot;tab&quot;</span>,</span><br><span class="line">    <span class="string">&quot;16&quot;</span>: <span class="string">&quot;q&quot;</span>,</span><br><span class="line">    <span class="string">&quot;17&quot;</span>: <span class="string">&quot;w&quot;</span>,</span><br><span class="line">    <span class="string">&quot;18&quot;</span>: <span class="string">&quot;e&quot;</span>,</span><br><span class="line">    <span class="string">&quot;19&quot;</span>: <span class="string">&quot;r&quot;</span>,</span><br><span class="line">    <span class="string">&quot;20&quot;</span>: <span class="string">&quot;t&quot;</span>,</span><br><span class="line">    <span class="string">&quot;21&quot;</span>: <span class="string">&quot;y&quot;</span>,</span><br><span class="line">    <span class="string">&quot;22&quot;</span>: <span class="string">&quot;u&quot;</span>,</span><br><span class="line">    <span class="string">&quot;23&quot;</span>: <span class="string">&quot;i&quot;</span>,</span><br><span class="line">    <span class="string">&quot;24&quot;</span>: <span class="string">&quot;o&quot;</span>,</span><br><span class="line">    <span class="string">&quot;25&quot;</span>: <span class="string">&quot;p&quot;</span>,</span><br><span class="line">    <span class="string">&quot;26&quot;</span>: <span class="string">&quot;[&quot;</span>,</span><br><span class="line">    <span class="string">&quot;27&quot;</span>: <span class="string">&quot;]&quot;</span>,</span><br><span class="line">    <span class="string">&quot;28&quot;</span>: <span class="string">&quot;enter&quot;</span>,</span><br><span class="line">    <span class="string">&quot;29&quot;</span>: <span class="string">&quot;caps&quot;</span>,</span><br><span class="line">    <span class="string">&quot;30&quot;</span>: <span class="string">&quot;a&quot;</span>,</span><br><span class="line">    <span class="string">&quot;31&quot;</span>: <span class="string">&quot;s&quot;</span>,</span><br><span class="line">    <span class="string">&quot;32&quot;</span>: <span class="string">&quot;d&quot;</span>,</span><br><span class="line">    <span class="string">&quot;33&quot;</span>: <span class="string">&quot;f&quot;</span>,</span><br><span class="line">    <span class="string">&quot;34&quot;</span>: <span class="string">&quot;g&quot;</span>,</span><br><span class="line">    <span class="string">&quot;35&quot;</span>: <span class="string">&quot;h&quot;</span>,</span><br><span class="line">    <span class="string">&quot;36&quot;</span>: <span class="string">&quot;j&quot;</span>,</span><br><span class="line">    <span class="string">&quot;37&quot;</span>: <span class="string">&quot;k&quot;</span>,</span><br><span class="line">    <span class="string">&quot;38&quot;</span>: <span class="string">&quot;l&quot;</span>,</span><br><span class="line">    <span class="string">&quot;39&quot;</span>: <span class="string">&quot;;&quot;</span>,</span><br><span class="line">    <span class="string">&quot;40&quot;</span>: <span class="string">&quot;&#x27;&quot;</span>,</span><br><span class="line">    <span class="string">&quot;41&quot;</span>: <span class="string">&quot;#&quot;</span>,</span><br><span class="line">    <span class="string">&quot;42&quot;</span>: <span class="string">&quot;shift&quot;</span>,</span><br><span class="line">    <span class="string">&quot;43&quot;</span>: <span class="string">&quot;\\&quot;</span>,</span><br><span class="line">    <span class="string">&quot;44&quot;</span>: <span class="string">&quot;z&quot;</span>,</span><br><span class="line">    <span class="string">&quot;45&quot;</span>: <span class="string">&quot;x&quot;</span>,</span><br><span class="line">    <span class="string">&quot;46&quot;</span>: <span class="string">&quot;c&quot;</span>,</span><br><span class="line">    <span class="string">&quot;47&quot;</span>: <span class="string">&quot;v&quot;</span>,</span><br><span class="line">    <span class="string">&quot;48&quot;</span>: <span class="string">&quot;b&quot;</span>,</span><br><span class="line">    <span class="string">&quot;49&quot;</span>: <span class="string">&quot;n&quot;</span>,</span><br><span class="line">    <span class="string">&quot;50&quot;</span>: <span class="string">&quot;m&quot;</span>,</span><br><span class="line">    <span class="string">&quot;51&quot;</span>: <span class="string">&quot;,&quot;</span>,</span><br><span class="line">    <span class="string">&quot;52&quot;</span>: <span class="string">&quot;.&quot;</span>,</span><br><span class="line">    <span class="string">&quot;53&quot;</span>: <span class="string">&quot;/&quot;</span>,</span><br><span class="line">    <span class="string">&quot;54&quot;</span>: <span class="string">&quot;ctrl&quot;</span>,</span><br><span class="line">    <span class="string">&quot;55&quot;</span>: <span class="string">&quot;win&quot;</span>,</span><br><span class="line">    <span class="string">&quot;56&quot;</span>: <span class="string">&quot;alt&quot;</span>,</span><br><span class="line">    <span class="string">&quot;57&quot;</span>: <span class="string">&quot;space&quot;</span>,</span><br><span class="line">    <span class="string">&quot;58&quot;</span>: <span class="string">&quot;alt&quot;</span>,</span><br><span class="line">    <span class="string">&quot;59&quot;</span>: <span class="string">&quot;win&quot;</span>,</span><br><span class="line">    <span class="string">&quot;60&quot;</span>: <span class="string">&quot;menu&quot;</span>,</span><br><span class="line">    <span class="string">&quot;61&quot;</span>: <span class="string">&quot;ctrl&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">flag = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> packet <span class="keyword">in</span> capture:</span><br><span class="line">    payload = packet.layers[<span class="number">2</span>]._all_fields[<span class="string">&quot;udp.payload&quot;</span>][<span class="number">75</span>:].split(<span class="string">&quot;:&quot;</span>) <span class="comment"># Ignore the fist 75 characters from the payload</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(payload)):</span><br><span class="line">        payload[i] = <span class="built_in">str</span>(binascii.unhexlify(payload[i]), <span class="string">&quot;ascii&quot;</span>) <span class="comment"># Coinvert to ASCII representation</span></span><br><span class="line">    flag.append(<span class="string">&quot;&quot;</span>.join(payload))</span><br><span class="line"></span><br><span class="line">res = <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> flag:</span><br><span class="line">    res += <span class="built_in">map</span>[<span class="built_in">str</span>(f)]</span><br><span class="line"><span class="built_in">print</span>(res.replace(<span class="string">&quot;shift[&quot;</span>, <span class="string">&quot;&#123;&quot;</span>).replace(<span class="string">&quot;shift]&quot;</span>, <span class="string">&quot;&#125;&quot;</span>).replace(<span class="string">&quot;enter&quot;</span>, <span class="string">&quot;&quot;</span>).replace(<span class="string">&quot;space&quot;</span>, <span class="string">&quot;_&quot;</span>)) <span class="comment"># Description said we can swap spaces with underscores</span></span><br></pre></td></tr></table></figure>
+<p>In the end we get the following flag: <code>shctf&#123;thanks_f0r_th3_t4nk._he_n3ver_get5_me_anyth1ng&#125;</code>.</p>
+<h2 id="🔮-Future-Stego"><a href="#🔮-Future-Stego" class="headerlink" title="🔮 Future Stego"></a>🔮 Future Stego</h2><p>For this challenge there were two pictures, one to download which was:</p>
+<img alt="The quality is insane" src="shuttle.jpg" /><span class="image-caption">The quality is insane</span>
+
+<p>There also was another picture in the description, as a hint:</p>
+<img alt="I wasn't born when this was published x)" src="newspaper.jpg" /><span class="image-caption">I wasn't born when this was published x)</span>
+
+<p>After trying lots of steganography techniques, I couldn’t find any that lead me to the flag. One of the last was to use <code>stegcracker</code>. I tried to bruteforce the password with the rockyou wordlist, but stopped at around 300’000 words tried. Nothing.<br>But the picture wasn’t here for <strong>nothing</strong>.. Let’s try some passwords that are in the news paper picture and use <code>steghide --extract -sf shuttle.jpg</code>. After playing around and trying some combinations such as <code>spacewoman</code>, <code>newsweek</code> or <code>sally k. ride</code>, I tried the file name: <code>sallyride</code>. This was the password and extracted a text file which contained the flag: <code>shctf&#123;weightlessness_is_a_great_equalizer&#125;</code>. It also would’ve worked with <code>stegcracker</code> and the right password in a text file.</p>
+
+        </div>
+        <br>
+        <a style="background-image: none" target="_blank" rel="noopener" href="https://patreon.com/bePatron?u=50703556"><img class="donation-button" src="https://img.shields.io/badge/Become_a_patron-F96854?style=for-the-badge&logo=patreon&logoColor=white" /></a>
+        <a style="background-image: none" target="_blank" rel="noopener" href="https://ko-fi.com/kkrypt0nn"><img class="donation-button" src="https://img.shields.io/badge/Buy_me_a_coffee-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" /></a><br><br>
+</article>
+<script src="https://giscus.app/client.js"
+        data-repo="kkrypt0nn/krypton.ninja"
+        data-repo-id="R_kgDOHEsRjg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOHEsRjs4CPXH5"
+        data-mapping="title"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+    
+        <div id="footer-post-container">
+    <div id="footer-post">
+
+        <div id="nav-footer" style="display: none">
+            <ul>
+                
+                    <li><a href="/">~/</a></li>
+                
+                    <li><a href="/about/">~/about</a></li>
+                
+                    <li><a href="/archives/">~/posts</a></li>
+                
+                    <li><a href="/supporters/">~/supporters</a></li>
+                
+                    <li><a href="/ctfs/">~/ctfs</a></li>
+                
+                    <li><a href="/search/">~/search</a></li>
+                
+                    <li><a href="/atom.xml">~/rss</a></li>
+                
+            </ul>
+        </div>
+
+        <div id="toc-footer" style="display: none">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%86%97-k"><span class="toc-number">1.</span> <span class="toc-text">🆗 k?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%AC-Discord"><span class="toc-number">2.</span> <span class="toc-text">💬 Discord</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9B%A1%EF%B8%8F-Guardians-of-the-Galaxy"><span class="toc-number">3.</span> <span class="toc-text">🛡️ Guardians of the Galaxy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%91%E2%80%8D%F0%9F%9A%80-Space-traveler"><span class="toc-number">4.</span> <span class="toc-text">🧑‍🚀 Space traveler</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%95%B5%EF%B8%8F%E2%80%8D%E2%99%82%EF%B8%8F-Curious"><span class="toc-number">5.</span> <span class="toc-text">🕵️‍♂️ Curious?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%80-Launched"><span class="toc-number">6.</span> <span class="toc-text">🚀 Launched</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%8C-Flag-in-space"><span class="toc-number">7.</span> <span class="toc-text">🌌 Flag in space</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A4%96-R2D2"><span class="toc-number">8.</span> <span class="toc-text">🤖 R2D2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%9F-Starman"><span class="toc-number">9.</span> <span class="toc-text">🌟 Starman</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%90%95-Space-Buds"><span class="toc-number">10.</span> <span class="toc-text">🐕 Space Buds</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9B%B0%EF%B8%8F-Cape-Kennedy"><span class="toc-number">11.</span> <span class="toc-text">🛰️ Cape Kennedy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%AD%90-Star-Pcap"><span class="toc-number">12.</span> <span class="toc-text">⭐ Star Pcap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%91%81%EF%B8%8F%E2%80%8D%F0%9F%97%A8%EF%B8%8F-Mysterious-Broadcast"><span class="toc-number">13.</span> <span class="toc-text">👁️‍🗨️ Mysterious Broadcast</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%90%88-Space-Captain-Garfield"><span class="toc-number">14.</span> <span class="toc-text">🐈 Space Captain Garfield</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%A9-Netflix-and-CTF"><span class="toc-number">15.</span> <span class="toc-text">🚩 Netflix and CTF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%A6-Strange-Traffic"><span class="toc-number">16.</span> <span class="toc-text">🚦 Strange Traffic</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%AE-Future-Stego"><span class="toc-number">17.</span> <span class="toc-text">🔮 Future Stego</span></a></li></ol>
+        </div>
+
+        <div id="share-footer" style="display: none">
+            <ul>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://www.facebook.com/sharer.php?u=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/"><i
+                    class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/&text=🚀 Space Heroes 2022 CTF write-up"><i
+                    class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://www.linkedin.com/shareArticle?url=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/&title=🚀 Space Heroes 2022 CTF write-up"><i
+                    class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/&is_video=false&description=🚀 Space Heroes 2022 CTF write-up"><i
+                    class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" href="mailto:?subject=🚀 Space Heroes 2022 CTF write-up&body=Check out this article: https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/"><i
+                    class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/&title=🚀 Space Heroes 2022 CTF write-up"><i
+                    class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://reddit.com/submit?url=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/&title=🚀 Space Heroes 2022 CTF write-up"><i
+                    class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://www.stumbleupon.com/submit?url=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/&title=🚀 Space Heroes 2022 CTF write-up"><i
+                    class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://digg.com/submit?url=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/&title=🚀 Space Heroes 2022 CTF write-up"><i
+                    class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://www.tumblr.com/share/link?url=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/&name=🚀 Space Heroes 2022 CTF write-up&description="><i
+                    class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://krypton.ninja/2022/04/03/Space-Heroes-2022-CTF-write-up/&t=🚀 Space Heroes 2022 CTF write-up"><i
+                    class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+        </div>
+
+        <div id="actions-footer">
+            <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i
+                        class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+            <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i
+                        class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+            <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i
+                        class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+            <a id="top" style="display:none" class="icon" href="#"
+               onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg"
+                                                                               aria-hidden="true"></i> Top
+            </a>
+        </div>
+
+    </div>
+</div>
+
+    
+    <footer id="footer">
+    <div class="footer-left">
+        Copyright &copy;
+        
+        
+        2022
+        Krypton
+    </div>
+    <div class="footer-right">
+        <nav>
+            <ul>
+                
+                    <li><a href="/">~/</a></li>
+                
+                    <li><a href="/about/">~/about</a></li>
+                
+                    <li><a href="/archives/">~/posts</a></li>
+                
+                    <li><a href="/supporters/">~/supporters</a></li>
+                
+                    <li><a href="/ctfs/">~/ctfs</a></li>
+                
+                    <li><a href="/search/">~/search</a></li>
+                
+                    <li><a href="/atom.xml">~/rss</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+</div>
+<!-- styles -->
+
+
+
+    <link
+            rel="preload"
+            href="/lib/font-awesome/css/all.min.css"
+            as="style"
+            onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript
+    >
+        <link
+                rel="stylesheet"
+                href="/lib/font-awesome/css/all.min.css"
+        />
+    </noscript>
+
+
+<!-- JQuery -->
+
+    
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<!-- Clipboard -->
+
+    
+        
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+    
+    <script type="text/javascript">
+        $(function () {
+            // copy-btn HTML
+            var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+            btn += '<i class="far fa-clone"></i>';
+            btn += '</span>';
+            // mount it!
+            $(".highlight table").before(btn);
+            var clip = new ClipboardJS('.btn-copy', {
+                text: function (trigger) {
+                    return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str, it) => str + it.innerText + '\n', '')
+                }
+            });
+            clip.on('success', function (e) {
+                e.trigger.setAttribute('aria-label', "Copied!");
+                e.clearSelection();
+            })
+        })
+    </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- Display Spotify Now Playing -->
+
+<!-- Display Discord status as border around avatar -->
+
+<!-- Search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-205526455-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'UA-205526455-1');
+    </script>
+
+<!-- Firebase -->
+
+    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+    <script>
+	(function() {
+		var title = '🚀 Space Heroes 2022 CTF write-up'
+		if (title && ('true' === "true")) {
+			firebase.initializeApp({
+				apiKey: 'AIzaSyDfEjW5zUc5P2mTghIDVurxg7AVgK2YskQ',
+				projectId: 'krypton-blog'
+			})
+
+
+			var db = firebase.firestore()
+			var articles = db.collection('posts')
+			var doc = articles.doc(title)
+
+			doc.get().then(function(d){
+				var count
+				if (!d.exists) {
+					doc.set({
+						count: 1
+					})
+					count=1
+				}
+				else {
+					count = d.data().count
+					if (!(window.localStorage&&window.localStorage.getItem(title))) {
+                        doc.set({
+                            count: count+1
+                        })
+                        count++
+					}
+				}
+                if (window.localStorage) {
+                    localStorage.setItem(title, true)
+                }
+                document.getElementById("views").textContent = count + (count > 1 ? ' views' : ' view')
+			})
+		}
+	})()
+</script>
+
+</body>
+</html>

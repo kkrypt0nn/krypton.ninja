@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"/>
+    <meta name="theme-color" content="#9C84EF">
+    
+    <meta name="og:image" content="https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/Banner.webp">
+    <meta name="og:image:width" content="1000">
+    <meta name="og:image:height" content="420">
+    <meta name="description" content="So for those of you who know me for quite a long time, they know I’ve been cheating in Minecraft for quite some time. Yes, I cheated in a block game. But I didn’t just installed a Minecraft cheating">
+<meta property="og:type" content="article">
+<meta property="og:title" content="🔒 How I protected my Minecraft cheating client">
+<meta property="og:url" content="https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/index.html">
+<meta property="og:site_name" content="Krypton">
+<meta property="og:description" content="So for those of you who know me for quite a long time, they know I’ve been cheating in Minecraft for quite some time. Yes, I cheated in a block game. But I didn’t just installed a Minecraft cheating">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/Banner.webp">
+<meta property="og:image" content="https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/Main-Menu.png">
+<meta property="og:image" content="https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/Login.png">
+<meta property="article:published_time" content="2022-01-30T21:05:12.000Z">
+<meta property="article:modified_time" content="2022-07-28T18:35:02.255Z">
+<meta property="article:author" content="Krypton">
+<meta property="article:tag" content="minecraft">
+<meta property="article:tag" content="cheating">
+<meta property="article:tag" content="client">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="security">
+<meta property="article:tag" content="protection">
+<meta property="article:tag" content="obfuscation">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/Banner.webp">
+    
+    
+    
+    
+        
+            
+                
+                    <link rel="shortcut icon" href="https://www.gravatar.com/avatar/b15cc9bf5e4b3090dd8d77b7c907718d?s=48">
+                
+            
+        
+        
+            
+                
+                    <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/b15cc9bf5e4b3090dd8d77b7c907718d?s=192" sizes="192x192">
+                
+            
+        
+        
+            
+                
+                    <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/b15cc9bf5e4b3090dd8d77b7c907718d?s=180">
+                
+            
+        
+    
+    <!-- title -->
+    <title>🔒 How I protected my Minecraft cheating client</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+        <link rel="alternate" href="/atom.xml" title="Krypton" type="application/atom+xml"/>
+    
+    <!-- mathjax -->
+    
+        <script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+
+        </script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML'
+                async></script>
+    
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+
+    <div id="header-post">
+    <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 },
+    'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+    <span id="menu">
+    <span id="nav">
+      <ul>
+          
+              <li><a href="/">~/</a></li>
+          
+              <li><a href="/about/">~/about</a></li>
+          
+              <li><a href="/archives/">~/posts</a></li>
+          
+              <li><a href="/supporters/">~/supporters</a></li>
+          
+              <li><a href="/ctfs/">~/ctfs</a></li>
+          
+              <li><a href="/search/">~/search</a></li>
+          
+              <li><a href="/atom.xml">~/rss</a></li>
+          
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+          
+              <li><a class="icon" aria-label="Previous post "
+                     href="/2022/03/28/Insomnihack-2022-CTF-write-up/"><i class="fas fa-chevron-left" aria-hidden="true"
+                                                              onmouseover="$('#i-prev').toggle();"
+                                                              onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+          
+              <li><a class="icon" aria-label="Next post " href="/2021/10/16/What-is-Go/"><i
+                              class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                              onmouseout="$('#i-next').toggle();"></i></a></li>
+          
+          <li><a class="icon" aria-label="Back to top " href="#"
+                 onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up"
+                                                                                 aria-hidden="true"
+                                                                                 onmouseover="$('#i-top').toggle();"
+                                                                                 onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt"
+                                                                                      aria-hidden="true"
+                                                                                      onmouseover="$('#i-share').toggle();"
+                                                                                      onmouseout="$('#i-share').toggle();"
+                                                                                      onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://www.facebook.com/sharer.php?u=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/"><i
+                    class="fab fa-facebook " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/&text=🔒 How I protected my Minecraft cheating client"><i
+                    class="fab fa-twitter " aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://www.linkedin.com/shareArticle?url=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/&title=🔒 How I protected my Minecraft cheating client"><i
+                    class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/&is_video=false&description=🔒 How I protected my Minecraft cheating client"><i
+                    class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+    <li><a class="icon" href="mailto:?subject=🔒 How I protected my Minecraft cheating client&body=Check out this article: https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/"><i
+                    class="fas fa-envelope " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/&title=🔒 How I protected my Minecraft cheating client"><i
+                    class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://reddit.com/submit?url=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/&title=🔒 How I protected my Minecraft cheating client"><i
+                    class="fab fa-reddit " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://www.stumbleupon.com/submit?url=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/&title=🔒 How I protected my Minecraft cheating client"><i
+                    class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://digg.com/submit?url=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/&title=🔒 How I protected my Minecraft cheating client"><i
+                    class="fab fa-digg " aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://www.tumblr.com/share/link?url=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/&name=🔒 How I protected my Minecraft cheating client&description="><i
+                    class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/&t=🔒 How I protected my Minecraft cheating client"><i
+                    class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%91%E2%80%8D%F0%9F%92%BB-Cheating-client"><span class="toc-number">1.</span> <span class="toc-text">🧑‍💻 Cheating client</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%90-Login"><span class="toc-number">2.</span> <span class="toc-text">🔐 Login</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Username-amp-password"><span class="toc-number">2.1.</span> <span class="toc-text">Username &amp; password</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Token"><span class="toc-number">2.2.</span> <span class="toc-text">Token</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%BD-Hardware-identification-HWID"><span class="toc-number">3.</span> <span class="toc-text">💽 Hardware identification (HWID)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%80-Kill-switch"><span class="toc-number">4.</span> <span class="toc-text">💀 Kill switch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%8A%99%EF%B8%8F-Obfuscation"><span class="toc-number">5.</span> <span class="toc-text">㊙️ Obfuscation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%9C-Conclusion"><span class="toc-number">6.</span> <span class="toc-text">📜 Conclusion</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+
+<div class="content index py4">
+    
+    <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
+    <header>
+        
+    <h1 class="posttitle" itemprop="name headline">
+        🔒 How I protected my Minecraft cheating client
+    </h1>
+
+
+
+            <div class="meta">
+                <span class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                
+                    
+                        <div class="author-logo" style="background-image: url(https://www.gravatar.com/avatar/b15cc9bf5e4b3090dd8d77b7c907718d);"></div>
+                    
+                
+                <span id="name" itemprop="name">
+                    <a href="/">Krypton</a>
+                </span>
+                </span> @
+                
+    <div class="postdate">
+        
+            <time datetime="2022-01-30T21:05:12.000Z"
+                  itemprop="datePublished">January 30, 2022</time>
+            
+        
+    </div>
+
+
+                    <div>
+    <i class="fas fa-clock"></i>
+    9 min. read | 
+                            <i class="fas fa-eye"></i>
+    <span id="views">1337 views</span>
+</div>
+                            
+
+                                
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/cheating/" rel="tag">cheating</a>, <a class="tag-link-link" href="/tags/client/" rel="tag">client</a>, <a class="tag-link-link" href="/tags/java/" rel="tag">java</a>, <a class="tag-link-link" href="/tags/minecraft/" rel="tag">minecraft</a>, <a class="tag-link-link" href="/tags/obfuscation/" rel="tag">obfuscation</a>, <a class="tag-link-link" href="/tags/protection/" rel="tag">protection</a>, <a class="tag-link-link" href="/tags/security/" rel="tag">security</a>
+    </div>
+
+
+            </div>
+    </header>
+    
+
+        <div class="content" itemprop="articleBody">
+            <img src="Banner.webp"/>
+
+<p>So for those of you who know me for quite a long time, they know I’ve been cheating in Minecraft for quite some time. Yes, I cheated in a block game. But I didn’t just installed a Minecraft cheating client, went on a server and killed everyone, I made my own cheating client. Now this might sound even more <em>cringe</em>, but it taught me a lot, especially a lot about Java.</p>
+<h2 id="🧑‍💻-Cheating-client"><a href="#🧑‍💻-Cheating-client" class="headerlink" title="🧑‍💻 Cheating client"></a>🧑‍💻 Cheating client</h2><p>So before I explain how I implemented some protection to my, never released nor finished, client I would like to explain how a cheating client works.<br>When you first want to make a client you need to know what you will have to code and where. The answer is pretty simple: You add your own code to the official Minecraft client. You may not know but, there is the <a target="_blank" rel="noopener" href="http://www.modcoderpack.com/">Minecraft Coder Pack</a> publicly available which gives anyone access to the source code of Minecraft itself.</p>
+<img src="Main-Menu.png" alt="The main menu of my old cheating client, similar to the normal one"/><span class="image-caption">The main menu of my old cheating client, similar to the normal one</span>
+
+<p>So now that we know <em>where</em> to code, we need to know <em>how</em> and <em>what</em> to code. The answer to the how question is very simple as Minecraft is coded in Java, it leaves you pretty much one possibility: You need to code your client in a programming language with JVM, the most popular ones are Kotlin and Java of course. For it to be easier as I had some small knowledge in Java, I decided to go for Java. Now comes the question to what to code. Again very simple as there are components that most cheating clients have:</p>
+<ul>
+<li><strong>Click GUI</strong></li>
+<li><strong>Commands</strong></li>
+<li><strong>Events</strong></li>
+<li><strong>Keybindings</strong></li>
+<li><strong>Modules</strong></li>
+</ul>
+<p>Once this is known, we can start to code the client. Once you’ve finished it, you can either you make it public, paid or completely private. Depending on what you choose you will require different type of protection. I wanted to go for a paid private client, but this project never came to a conclusion.<br>However, I am quite happy looking back at the different security layers I’ve implemented, which are definitely not the best. But the past me of 5 years ago was proud of :) Of course, all of these can be bypassed and many other things can be done, but again; I was happy I did this :)</p>
+<h2 id="🔐-Login"><a href="#🔐-Login" class="headerlink" title="🔐 Login"></a>🔐 Login</h2><img src="Login.png" alt="My password was 'a' :D"/><span class="image-caption">My password was 'a' :D</span>
+
+<p>One of the most used and known protection is to set up a login method. Of course for that you need a web server, as you don’t want to hard code the credentials inside your client. So I created some simple PHP files to handle the different types of logins I’ve decided to implement.</p>
+<h3 id="Username-amp-password"><a href="#Username-amp-password" class="headerlink" title="Username &amp; password"></a>Username &amp; password</h3><p>This was the first method I’ve implemented. The only thing I had to do was to create a login endpoint to my website and let the users login with their username and password from the client. The client would then send the username and password to the server via the headers and the server would check if the credentials are correct. The server would then return a JSON object as response to say whether the given credentials were correct or not. The JSON object would look like this:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;status&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;message&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Login successful&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span> <span class="number">200</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;username&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Krypton&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;role&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Admin&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;uuid&quot;</span><span class="punctuation">:</span> <span class="number">7331</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;access_token&quot;</span><span class="punctuation">:</span> <span class="string">&quot;4kzAEOcyCbrTdtIgdXzIgsrEwGGadrZNJigGkW33llSpuhkh&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>Most of the fields, such as <code>role</code> or <code>username</code> were just so that it could later be used directly within the client and display such information for example on the main menu as you’ve seen above. The <code>access_token</code> is the token that is used to authenticate the user for configurations and other things to download that are only accessible for this user.</p>
+<h3 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h3><p>As shown on the JSON object above, a <code>access_token</code> field is given in the response. This token is used not only for downloading configurations or also for other things, but this token is then later saved on the local machine and used for automatic login, so that you don’t need to always give in your username and password. This was a <em>“Remember me”</em> option. So the login method using the token was much easier and user-friendly.<br>To reset that token you simply had to change your password, and then you would have to log in again to get the new access token overwritten into the local machine.</p>
+<h2 id="💽-Hardware-identification-HWID"><a href="#💽-Hardware-identification-HWID" class="headerlink" title="💽 Hardware identification (HWID)"></a>💽 Hardware identification (HWID)</h2><p>Of course a simple login with username and password are not always the best option, that’s where I started to use <strong>hardware identification</strong> to make sure the correct user is logging in. The HWID is calculated based on different hardware components, which then gives a unique ID for each machine. Of course this HWID can be easily spoofed, but it was a simple check that costs not a lot of time to implement and can only do good things. For each request made from the client there was also this HWID of the user sent to the server. The server would then check if the HWID is correct and if so, it would return the different JSON as shown above. A HWID looks like this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">111919518612-1211951819-1111919518612-1-1-1-1-1-1-11313-11519-124</span><br></pre></td></tr></table></figure>
+<p>I’ve made a basic <a target="_blank" rel="noopener" href="https://github.com/kkrypt0nn/Basic-HWID-Grabber">repository public</a> about how to get such an HWID easily. Of course the method I’ve implemented into my client was slightly different from the public repository, but it’s still pretty simple.<br>This was another simple way to make sure the right person was logging to the right user and sharing accounts.</p>
+<h2 id="💀-Kill-switch"><a href="#💀-Kill-switch" class="headerlink" title="💀 Kill switch"></a>💀 Kill switch</h2><p>The kill switch was the last <em>security layer</em> I’ve implemented. It was very basic and useful in case I wanted to prevent anyone from logging in. Once every, for example, 5 minutes the client make a simple web request to the kill switch endpoint to make sure the kill switch is not activated. If it was activated, then the client would automatically log out and shut down Minecraft. It was something very simple that I could edit at any time. The JSON object that was being returned was very simple:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;status&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;message&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Kill switch is enabled&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span> <span class="number">403</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;kill_switch&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="㊙️-Obfuscation"><a href="#㊙️-Obfuscation" class="headerlink" title="㊙️ Obfuscation"></a>㊙️ Obfuscation</h2><p>Obfuscating my client would’ve been the last securiy I could’ve implemented when releasing it. Since I never released this client, I’ve never really did it. However, I can explain how this works!<br>In simple words you turn your code unreadable for humans, but still executable and fully working. Some example of so called obfuscators is <a target="_blank" rel="noopener" href="https://guardsquare.com/proguard">ProGuard</a>.<br>Here would be the short version of an obfuscated “Hello world” program from <a target="_blank" rel="noopener" href="https://github.com/superblaubeere27/obfuscator">this</a> obfuscator, to get the full result you can check <a target="_blank" rel="noopener" href="https://pastebin.com/RFHtgPtX">this link</a>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorld</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(<span class="keyword">final</span> String[] array)</span> &#123;</span><br><span class="line">    <span class="comment">// invokedynamic(1:(Ljava/io/PrintStream;Ljava/lang/String;)V, invokedynamic(0:()Ljava/io/PrintStream;), HelloWorld.llII[HelloWorld.lllI[0]])</span></span><br><span class="line">    <span class="type">float</span> <span class="variable">lllllllIlIllIII</span> <span class="operator">=</span> HelloWorld.lllI[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">while</span> (llIll((<span class="type">int</span>)lllllllIlIllIII, HelloWorld.lllI[<span class="number">1</span>])) &#123;</span><br><span class="line">      <span class="comment">// invokedynamic(2:(Ljava/io/PrintStream;I)V, invokedynamic(0:()Ljava/io/PrintStream;), lllllllIlIllIII)</span></span><br><span class="line">      ++lllllllIlIllIII;</span><br><span class="line">      <span class="string">&quot;&quot;</span>.length();</span><br><span class="line">      <span class="keyword">if</span> (<span class="string">&quot; &quot;</span>.length() == (<span class="string">&quot; &quot;</span>.length() &lt;&lt; (<span class="string">&quot;   &quot;</span>.length() &lt;&lt; <span class="string">&quot; &quot;</span>.length()) &amp; ~(<span class="string">&quot; &quot;</span>.length() &lt;&lt; (<span class="string">&quot;   &quot;</span>.length() &lt;&lt; <span class="string">&quot; &quot;</span>.length())))) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="literal">null</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>I think you get the idea of what an obfuscator does :)</p>
+<h2 id="📜-Conclusion"><a href="#📜-Conclusion" class="headerlink" title="📜 Conclusion"></a>📜 Conclusion</h2><p>This was pretty much how my client was designed. I’ve made it as simple as possible, so that it can be used by everyone. I was very happy about the result back then, but I’ve never released my client to the public. It was a great time working on this project but everything comes to an end right?<br>Maybe I will come back one day in coding such a client, or maybe a normal legit client, who knows :D</p>
+
+        </div>
+        <br>
+        <a style="background-image: none" target="_blank" rel="noopener" href="https://patreon.com/bePatron?u=50703556"><img class="donation-button" src="https://img.shields.io/badge/Become_a_patron-F96854?style=for-the-badge&logo=patreon&logoColor=white" /></a>
+        <a style="background-image: none" target="_blank" rel="noopener" href="https://ko-fi.com/kkrypt0nn"><img class="donation-button" src="https://img.shields.io/badge/Buy_me_a_coffee-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" /></a><br><br>
+</article>
+<script src="https://giscus.app/client.js"
+        data-repo="kkrypt0nn/krypton.ninja"
+        data-repo-id="R_kgDOHEsRjg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOHEsRjs4CPXH5"
+        data-mapping="title"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+    
+        <div id="footer-post-container">
+    <div id="footer-post">
+
+        <div id="nav-footer" style="display: none">
+            <ul>
+                
+                    <li><a href="/">~/</a></li>
+                
+                    <li><a href="/about/">~/about</a></li>
+                
+                    <li><a href="/archives/">~/posts</a></li>
+                
+                    <li><a href="/supporters/">~/supporters</a></li>
+                
+                    <li><a href="/ctfs/">~/ctfs</a></li>
+                
+                    <li><a href="/search/">~/search</a></li>
+                
+                    <li><a href="/atom.xml">~/rss</a></li>
+                
+            </ul>
+        </div>
+
+        <div id="toc-footer" style="display: none">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%91%E2%80%8D%F0%9F%92%BB-Cheating-client"><span class="toc-number">1.</span> <span class="toc-text">🧑‍💻 Cheating client</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%90-Login"><span class="toc-number">2.</span> <span class="toc-text">🔐 Login</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Username-amp-password"><span class="toc-number">2.1.</span> <span class="toc-text">Username &amp; password</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Token"><span class="toc-number">2.2.</span> <span class="toc-text">Token</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%BD-Hardware-identification-HWID"><span class="toc-number">3.</span> <span class="toc-text">💽 Hardware identification (HWID)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%80-Kill-switch"><span class="toc-number">4.</span> <span class="toc-text">💀 Kill switch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%8A%99%EF%B8%8F-Obfuscation"><span class="toc-number">5.</span> <span class="toc-text">㊙️ Obfuscation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%9C-Conclusion"><span class="toc-number">6.</span> <span class="toc-text">📜 Conclusion</span></a></li></ol>
+        </div>
+
+        <div id="share-footer" style="display: none">
+            <ul>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://www.facebook.com/sharer.php?u=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/"><i
+                    class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/&text=🔒 How I protected my Minecraft cheating client"><i
+                    class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://www.linkedin.com/shareArticle?url=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/&title=🔒 How I protected my Minecraft cheating client"><i
+                    class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/&is_video=false&description=🔒 How I protected my Minecraft cheating client"><i
+                    class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" href="mailto:?subject=🔒 How I protected my Minecraft cheating client&body=Check out this article: https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/"><i
+                    class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/&title=🔒 How I protected my Minecraft cheating client"><i
+                    class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://reddit.com/submit?url=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/&title=🔒 How I protected my Minecraft cheating client"><i
+                    class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://www.stumbleupon.com/submit?url=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/&title=🔒 How I protected my Minecraft cheating client"><i
+                    class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://digg.com/submit?url=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/&title=🔒 How I protected my Minecraft cheating client"><i
+                    class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://www.tumblr.com/share/link?url=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/&name=🔒 How I protected my Minecraft cheating client&description="><i
+                    class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://krypton.ninja/2022/01/30/How-I-protected-my-Minecraft-cheating-client/&t=🔒 How I protected my Minecraft cheating client"><i
+                    class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+        </div>
+
+        <div id="actions-footer">
+            <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i
+                        class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+            <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i
+                        class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+            <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i
+                        class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+            <a id="top" style="display:none" class="icon" href="#"
+               onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg"
+                                                                               aria-hidden="true"></i> Top
+            </a>
+        </div>
+
+    </div>
+</div>
+
+    
+    <footer id="footer">
+    <div class="footer-left">
+        Copyright &copy;
+        
+        
+        2022
+        Krypton
+    </div>
+    <div class="footer-right">
+        <nav>
+            <ul>
+                
+                    <li><a href="/">~/</a></li>
+                
+                    <li><a href="/about/">~/about</a></li>
+                
+                    <li><a href="/archives/">~/posts</a></li>
+                
+                    <li><a href="/supporters/">~/supporters</a></li>
+                
+                    <li><a href="/ctfs/">~/ctfs</a></li>
+                
+                    <li><a href="/search/">~/search</a></li>
+                
+                    <li><a href="/atom.xml">~/rss</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+</div>
+<!-- styles -->
+
+
+
+    <link
+            rel="preload"
+            href="/lib/font-awesome/css/all.min.css"
+            as="style"
+            onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript
+    >
+        <link
+                rel="stylesheet"
+                href="/lib/font-awesome/css/all.min.css"
+        />
+    </noscript>
+
+
+<!-- JQuery -->
+
+    
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<!-- Clipboard -->
+
+    
+        
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+    
+    <script type="text/javascript">
+        $(function () {
+            // copy-btn HTML
+            var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+            btn += '<i class="far fa-clone"></i>';
+            btn += '</span>';
+            // mount it!
+            $(".highlight table").before(btn);
+            var clip = new ClipboardJS('.btn-copy', {
+                text: function (trigger) {
+                    return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str, it) => str + it.innerText + '\n', '')
+                }
+            });
+            clip.on('success', function (e) {
+                e.trigger.setAttribute('aria-label', "Copied!");
+                e.clearSelection();
+            })
+        })
+    </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- Display Spotify Now Playing -->
+
+<!-- Display Discord status as border around avatar -->
+
+<!-- Search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-205526455-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'UA-205526455-1');
+    </script>
+
+<!-- Firebase -->
+
+    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+    <script>
+	(function() {
+		var title = '🔒 How I protected my Minecraft cheating client'
+		if (title && ('true' === "true")) {
+			firebase.initializeApp({
+				apiKey: 'AIzaSyDfEjW5zUc5P2mTghIDVurxg7AVgK2YskQ',
+				projectId: 'krypton-blog'
+			})
+
+
+			var db = firebase.firestore()
+			var articles = db.collection('posts')
+			var doc = articles.doc(title)
+
+			doc.get().then(function(d){
+				var count
+				if (!d.exists) {
+					doc.set({
+						count: 1
+					})
+					count=1
+				}
+				else {
+					count = d.data().count
+					if (!(window.localStorage&&window.localStorage.getItem(title))) {
+                        doc.set({
+                            count: count+1
+                        })
+                        count++
+					}
+				}
+                if (window.localStorage) {
+                    localStorage.setItem(title, true)
+                }
+                document.getElementById("views").textContent = count + (count > 1 ? ' views' : ' view')
+			})
+		}
+	})()
+</script>
+
+</body>
+</html>

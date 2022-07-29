@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"/>
+    <meta name="theme-color" content="#9C84EF">
+    
+    <meta name="og:image" content="https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/Banner.webp">
+    <meta name="og:image:width" content="1000">
+    <meta name="og:image:height" content="420">
+    <meta name="description" content="The Insomni’hack 2022 CTF is a CTF hosted during the Insomni’hack conference in Geneva, Switzerland. You had to register yourself so that you can attend to the on-site CTF. There was a total of 31 c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="🚩 Insomni&#39;hack 2022 CTF write-up">
+<meta property="og:url" content="https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/index.html">
+<meta property="og:site_name" content="Krypton">
+<meta property="og:description" content="The Insomni’hack 2022 CTF is a CTF hosted during the Insomni’hack conference in Geneva, Switzerland. You had to register yourself so that you can attend to the on-site CTF. There was a total of 31 c">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/Banner.webp">
+<meta property="og:image" content="https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/gdbug_start.png">
+<meta property="og:image" content="https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/gdbug_loop.png">
+<meta property="og:image" content="https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/gdbug_gdb.png">
+<meta property="og:image" content="https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/gdbug_serial_checks.png">
+<meta property="og:image" content="https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/gdbug_meme.png">
+<meta property="og:image" content="https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/telegram_tables.png">
+<meta property="og:image" content="https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/telegram_tables_end.png">
+<meta property="og:image" content="https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/telegram_users_table.png">
+<meta property="og:image" content="https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/telegram_flag.png">
+<meta property="og:image" content="https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/telegram_bot_bully.png">
+<meta property="og:image" content="https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/wordle.png">
+<meta property="og:image" content="https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/welcome.png">
+<meta property="article:published_time" content="2022-03-28T15:23:11.000Z">
+<meta property="article:modified_time" content="2022-07-29T17:16:17.466Z">
+<meta property="article:author" content="Krypton">
+<meta property="article:tag" content="ctf">
+<meta property="article:tag" content="write-up">
+<meta property="article:tag" content="insomni&#39;hack">
+<meta property="article:tag" content="insomnihack">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/Banner.webp">
+    
+    
+    
+    
+        
+            
+                
+                    <link rel="shortcut icon" href="https://www.gravatar.com/avatar/b15cc9bf5e4b3090dd8d77b7c907718d?s=48">
+                
+            
+        
+        
+            
+                
+                    <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/b15cc9bf5e4b3090dd8d77b7c907718d?s=192" sizes="192x192">
+                
+            
+        
+        
+            
+                
+                    <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/b15cc9bf5e4b3090dd8d77b7c907718d?s=180">
+                
+            
+        
+    
+    <!-- title -->
+    <title>🚩 Insomni&#39;hack 2022 CTF write-up</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+        <link rel="alternate" href="/atom.xml" title="Krypton" type="application/atom+xml"/>
+    
+    <!-- mathjax -->
+    
+        <script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+
+        </script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML'
+                async></script>
+    
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+
+    <div id="header-post">
+    <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 },
+    'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+    <span id="menu">
+    <span id="nav">
+      <ul>
+          
+              <li><a href="/">~/</a></li>
+          
+              <li><a href="/about/">~/about</a></li>
+          
+              <li><a href="/archives/">~/posts</a></li>
+          
+              <li><a href="/supporters/">~/supporters</a></li>
+          
+              <li><a href="/ctfs/">~/ctfs</a></li>
+          
+              <li><a href="/search/">~/search</a></li>
+          
+              <li><a href="/atom.xml">~/rss</a></li>
+          
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+          
+              <li><a class="icon" aria-label="Previous post "
+                     href="/2022/04/03/Space-Heroes-2022-CTF-write-up/"><i class="fas fa-chevron-left" aria-hidden="true"
+                                                              onmouseover="$('#i-prev').toggle();"
+                                                              onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+          
+              <li><a class="icon" aria-label="Next post " href="/2022/01/30/How-I-protected-my-Minecraft-cheating-client/"><i
+                              class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                              onmouseout="$('#i-next').toggle();"></i></a></li>
+          
+          <li><a class="icon" aria-label="Back to top " href="#"
+                 onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up"
+                                                                                 aria-hidden="true"
+                                                                                 onmouseover="$('#i-top').toggle();"
+                                                                                 onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt"
+                                                                                      aria-hidden="true"
+                                                                                      onmouseover="$('#i-share').toggle();"
+                                                                                      onmouseout="$('#i-share').toggle();"
+                                                                                      onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://www.facebook.com/sharer.php?u=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/"><i
+                    class="fab fa-facebook " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/&text=🚩 Insomni&#39;hack 2022 CTF write-up"><i
+                    class="fab fa-twitter " aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://www.linkedin.com/shareArticle?url=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/&title=🚩 Insomni&#39;hack 2022 CTF write-up"><i
+                    class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/&is_video=false&description=🚩 Insomni&#39;hack 2022 CTF write-up"><i
+                    class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+    <li><a class="icon" href="mailto:?subject=🚩 Insomni&#39;hack 2022 CTF write-up&body=Check out this article: https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/"><i
+                    class="fas fa-envelope " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/&title=🚩 Insomni&#39;hack 2022 CTF write-up"><i
+                    class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://reddit.com/submit?url=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/&title=🚩 Insomni&#39;hack 2022 CTF write-up"><i
+                    class="fab fa-reddit " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://www.stumbleupon.com/submit?url=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/&title=🚩 Insomni&#39;hack 2022 CTF write-up"><i
+                    class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://digg.com/submit?url=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/&title=🚩 Insomni&#39;hack 2022 CTF write-up"><i
+                    class="fab fa-digg " aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://www.tumblr.com/share/link?url=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/&name=🚩 Insomni&#39;hack 2022 CTF write-up&description="><i
+                    class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/&t=🚩 Insomni&#39;hack 2022 CTF write-up"><i
+                    class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%90%9B-GDBug-120-points"><span class="toc-number">1.</span> <span class="toc-text">🐛 GDBug - 120 points</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A4%96-Bot-Telegram-75-points"><span class="toc-number">2.</span> <span class="toc-text">🤖 Bot Telegram - 75 points</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%85%B0%EF%B8%8F-Wordle-9-points"><span class="toc-number">3.</span> <span class="toc-text">🅰️ Wordle - 9 points</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%8A-Weak-Rivest-4-7-points"><span class="toc-number">4.</span> <span class="toc-text">🌊 Weak Rivest 4 - 7 points</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%AE-Magic-Words-7-points"><span class="toc-number">5.</span> <span class="toc-text">🔮 Magic Words - 7 points</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%91%8B-Welcome-challenge-6-points"><span class="toc-number">6.</span> <span class="toc-text">👋 Welcome challenge - 6 points</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+
+<div class="content index py4">
+    
+    <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
+    <header>
+        
+    <h1 class="posttitle" itemprop="name headline">
+        🚩 Insomni&#39;hack 2022 CTF write-up
+    </h1>
+
+
+
+            <div class="meta">
+                <span class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                
+                    
+                        <div class="author-logo" style="background-image: url(https://www.gravatar.com/avatar/b15cc9bf5e4b3090dd8d77b7c907718d);"></div>
+                    
+                
+                <span id="name" itemprop="name">
+                    <a href="/">Krypton</a>
+                </span>
+                </span> @
+                
+    <div class="postdate">
+        
+            <time datetime="2022-03-28T15:23:11.000Z"
+                  itemprop="datePublished">March 28, 2022</time>
+            
+        
+    </div>
+
+
+                    <div>
+    <i class="fas fa-clock"></i>
+    18 min. read | 
+                            <i class="fas fa-eye"></i>
+    <span id="views">1337 views</span>
+</div>
+                            
+
+                                
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/ctf/" rel="tag">ctf</a>, <a class="tag-link-link" href="/tags/insomni-hack/" rel="tag">insomni'hack</a>, <a class="tag-link-link" href="/tags/insomnihack/" rel="tag">insomnihack</a>, <a class="tag-link-link" href="/tags/write-up/" rel="tag">write-up</a>
+    </div>
+
+
+            </div>
+    </header>
+    
+
+        <div class="content" itemprop="articleBody">
+            <img src="Banner.webp"/>
+
+<p>The Insomni’hack 2022 CTF is a CTF hosted during the Insomni’hack conference in Geneva, Switzerland. You had to register yourself so that you can attend to the on-site CTF. There was a total of 31 challenges. As a beginner in CTFs I decided to mostly take the easy challenges. The CTF was from March 25 (6pm UTC) to March 26 (4am UTC) 2022.<br>As my first on-site CTF it was nice to see how many people were participating. It was also pretty amazing to see how some people were prepared; some people even decided to transport their own <em>big</em> monitor(s) 🤯 It was an overall amazing CTF, so many thanks to the organizers!<br>All flags had the same format which was <code>INS&#123;...&#125;</code>. Anyways, enough talking, here are the write-ups:</p>
+<h2 id="🐛-GDBug-120-points"><a href="#🐛-GDBug-120-points" class="headerlink" title="🐛 GDBug - 120 points"></a>🐛 GDBug - 120 points</h2><p>We were given a binary file (<a href="files/gdbug.bin">Download the file</a>) that we had to execute to get the right flag. Let’s start by running it with basic <code>./gdbug</code>:<br>When executing the file, a serial number to check needs to be given as an argument. After providing one as argument it would check the serial and return if it was a valid one or not. So let’s open up the binary in a disassembler and see how it works.</p>
+<img alt="There also was another, invalid, flag in the strings" src="gdbug_start.png"><span class="image-caption">There also was another, invalid, flag in the strings</span>
+
+<p>Looking at the top there was <code>--debug</code>, after running the binary with that serial it wasn’t a success; <code>INS&#123;Th1<span>$</span>Fl4gSuck<span>$</span>&#125;</code>. There also was a call to <code>ptrace()</code>, typical anti-debugging trick. If the binary was to be run from any debugger it would give this flag <code>INS&#123;W0ULDNT-1T-B3-T00-34SY&#125;</code>. Simply NOPing the entire ptrace check was enough to bypass it, now the binary can be ran in a debugger if needed. So let’s look at how the check for the serial works:</p>
+<img alt="A loop that will iterate over the length of the given serial" src="gdbug_loop.png"><span class="image-caption">A loop that will iterate over the length of the given serial</span>
+
+<p>At first there is a variable <code>x</code> initialized with the value <code>0x539</code>, then a new variable <code>i</code> initialized with the value <code>0x0</code>. After that, a loop starts:</p>
+<ul>
+<li>It loops forever until <code>i</code> has reached the length of the serial, so it goes over all characters in the serial</li>
+<li>The hexadecimal value of the character is then added to the <code>x</code> value</li>
+<li><code>i</code> is incremented by one</li>
+</ul>
+<p><em><strong>gdb</strong></em> also confirmed that it was the hexadecimal value of each character that was added to <code>x</code>:</p>
+<img alt="The binary was ran with 'AAAAAAA' as serial, 0x41 is the hexadecimal value of A" src="gdbug_gdb.png"><span class="image-caption">The binary was ran with 'AAAAAAA' as serial, 0x41 is the hexadecimal value of A</span>
+
+<p>At the end of that loop there were more checks as you can see from this:</p>
+<img alt="This is the last assembly picture for this challenge, no worries.." src="gdbug_serial_checks.png"><span class="image-caption">This is the last assembly picture for this challenge, no worries..</span>
+
+<p>It will be checked if <code>x</code> is equals <code>0xb38</code>, so the sum of all hexadecimal values of all characters in the serial must result to <code>0xb38</code>. After this check, there are 5 more checks that are really easy to understand:</p>
+<ul>
+<li>The length of the serial must be <code>0x18</code></li>
+<li>At index <code>0x4</code>, <code>0x9</code>, <code>0xe</code> and <code>0x13</code> of the serial, there should be a character with hexadecimal value <code>0x2d</code>, which is the hexadecimal value of <code>-</code>.</li>
+</ul>
+<p>A valid serial pattern would look like <code>xxxx-xxxx-xxxx-xxxx-xxxx</code>.<br>Based on these restrictions, we could simply create a bruteforce tool in Python:</p>
+<figure class="highlight python"><figcaption><span>Serial bruteforcer</span><a target="_blank" rel="noopener" href="https://gist.github.com/kkrypt0nn/ecd624597e00424bd462e2de583bc6f3">gdbug.py</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> string <span class="keyword">import</span> ascii_uppercase</span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">iter</span>():</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> itertools.product(ascii_uppercase, repeat=<span class="number">24</span>):</span><br><span class="line">        s = <span class="built_in">list</span>(s)</span><br><span class="line">        s[<span class="number">4</span>] = <span class="string">&quot;-&quot;</span></span><br><span class="line">        s[<span class="number">9</span>] = <span class="string">&quot;-&quot;</span></span><br><span class="line">        s[<span class="number">14</span>] = <span class="string">&quot;-&quot;</span></span><br><span class="line">        s[<span class="number">19</span>] = <span class="string">&quot;-&quot;</span></span><br><span class="line">        <span class="keyword">yield</span> <span class="string">&quot;&quot;</span>.join(s)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">solve</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">for</span> serial <span class="keyword">in</span> <span class="built_in">iter</span>():</span><br><span class="line">            x = <span class="number">0x539</span> <span class="comment"># Setup the variables</span></span><br><span class="line">            i = <span class="number">0</span></span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">True</span>):</span><br><span class="line">                <span class="keyword">if</span> (i &gt;= <span class="built_in">len</span>(serial)): <span class="comment"># Go over the length of the string</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                x += <span class="built_in">ord</span>(serial[i]) <span class="comment"># Append the hexadecimal value of the current character to &#x27;x&#x27;</span></span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;Trying <span class="subst">&#123;serial&#125;</span>&quot;</span>, end=<span class="string">&quot;\r&quot;</span>)</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">hex</span>(<span class="number">0xb38</span>)==<span class="built_in">hex</span>(x)): <span class="comment"># Check if the serial is a valid serial or not</span></span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;Found: INS&#123;&#123;<span class="subst">&#123;serial&#125;</span>&#125;&#125;&quot;</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="comment"># Remove this to see all possible flags</span></span><br><span class="line"></span><br><span class="line">solve()</span><br></pre></td></tr></table></figure>
+<p>The output was quite interesting…</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Found: INS&#123;AAAA-AAAA-AAAA-AAAA-AFZZ&#125;</span><br><span class="line">Found: INS&#123;AAAA-AAAA-AAAA-AAAA-AGYZ&#125;</span><br><span class="line">Found: INS&#123;AAAA-AAAA-AAAA-AAAA-AGZY&#125;</span><br><span class="line">Found: INS&#123;AAAA-AAAA-AAAA-AAAA-AHXZ&#125;</span><br><span class="line">Found: INS&#123;AAAA-AAAA-AAAA-AAAA-AHYY&#125;</span><br><span class="line">Found: INS&#123;AAAA-AAAA-AAAA-AAAA-AHZX&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>The reason was quite simple, <strong>all of them were valid flags</strong>!</p>
+<img alt="According to another player, the number is accurate" src="gdbug_meme.png"><span class="image-caption">According to another player, the number is accurate</span>
+
+<h2 id="🤖-Bot-Telegram-75-points"><a href="#🤖-Bot-Telegram-75-points" class="headerlink" title="🤖 Bot Telegram - 75 points"></a>🤖 Bot Telegram - 75 points</h2><p>This challenge was my personal favorite. We were given a Telegram bot to chat with, and we had as challenge to exploit it. So at first I tried to execute some of the commands it has. None of them were really surprising when being executed. Then I tried with some random arguments after the command, and boom! When executing the command <code>/challs leet</code> the bot returned</p>
+<blockquote>
+<p>Oops an error occured : (1054, “Unknown column ‘leet’ in where clause”)</p>
+</blockquote>
+<p>The challenge is about an SQL injection. After trying to get the list of tables to perform an <code>UNION</code> attack the bot said that whitespaces were not allowed, only one argument was allowed. Fortunately there is an easy bypass, which is to replace all whitespaces with <strong><code>/**/</code></strong> (comments), it will then be interpreted the same as a whitespace.<br>The first discovery was that some fields are too long to be sent along in some fields, so using <code>SUBSTR()</code> did the trick. The bot ended up leaking the <code>users</code> table. </p>
+<img src="telegram_tables.png">
+<img alt="I was unable to fit everything in one single picture..." src="telegram_tables_end.png"><span class="image-caption">I was unable to fit everything in one single picture...</span>
+
+<p>Then we can leak the columns inside that table, there was the column <code>username</code> and <code>password</code>:</p>
+<img alt="There were only 2 columns that could've been guessed" src="telegram_users_table.png"><span class="image-caption">There were only 2 columns that could've been guessed</span>
+
+<p>So now we can simply leak the credentials for the existing row(s). There was 3 users, one of them had the username <code>admin</code> and the password, the flag, <code>INS&#123;C0ngr@tz_YoU_d3<span>$</span>eRvE_T3iS_Fl@g&#125;</code>.</p>
+<img alt="woohoo!" src="telegram_flag.png"><span class="image-caption">woohoo!</span>
+
+<p>Also, dear staff members, sorry for bullying the bot :(</p>
+<img alt="They sent these messages exactly when the challenge was solved" src="telegram_bot_bully.png"><span class="image-caption">They sent these messages exactly when the challenge was solved</span>
+
+<h2 id="🅰️-Wordle-9-points"><a href="#🅰️-Wordle-9-points" class="headerlink" title="🅰️ Wordle - 9 points"></a>🅰️ Wordle - 9 points</h2><p>This challenge was based on the popular <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Wordle">worlde game</a> where you give a word of 5 characters and then you know if a character is in the word to guess, at the correct place or not in it at all.<br>We were given a netcat server that was listening on port <code>1337</code> and we had to exploit the game. We also had a binary file that did exactly the same, so that we can debug it (<a href="files/wordle.bin">Download the file</a>).<br>My first try was to actually spam the execution of the wordle binary and get the right word at some point since we were given an output that said what the correct word was.<br>Even when getting the right word, it gave the error message. So I opened the file in a disassembler. The assembly code for the logic was very easy:</p>
+<img alt="Some easy to understand Assembly code" src="wordle.png"><span class="image-caption">Some easy to understand Assembly code</span>
+
+<p>The program moves to the address <code>0xcb1</code> if the value in <code>data_2020e0</code> is equals <code>0xdeadbeef</code>. It will then call the <code>system()</code> function with a randomly taken string from the possible words. One of these words was <code>/bin/sh</code>, so it was clear there was shell access at the end.</p>
+<p>So let’s put <code>deadbeef</code> as user input? Well, the user input is stored in <code>data_2020c0</code>, so that won’t work. However, the user input is parsed with the unsafe <code>gets()</code> method, which means it is possible to overflow that value.<br>There is a difference of 32 bytes between both addresses. So a simple overflow of 32 bytes can let me put anything inside <code>data_2020e0</code>.<br>The payload for that overflow would be the following:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(python2 -c &#x27;print &quot;A&quot;*32 + &quot;\xef\xbe\xad\xde&quot;&#x27;; cat) | nc wordle.insomnihack.ch 1337</span><br></pre></td></tr></table></figure>
+<p>Since there was not only <code>/bin/sh</code> in the list of words, the program had to be executed multiple times.<br>In the end the flag was <code>INS&#123;C0ngr@tulat1on5!_th3_word_was_d3adBeef!&#125;</code>.</p>
+<h2 id="🌊-Weak-Rivest-4-7-points"><a href="#🌊-Weak-Rivest-4-7-points" class="headerlink" title="🌊 Weak Rivest 4 - 7 points"></a>🌊 Weak Rivest 4 - 7 points</h2><p>Weak Rivest 4 reminded me of the <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/RC4">RC4 cipher</a>. The cipher is using a keystream and is, of course, considered as insecure.<br>We were given 3 strings, 1 plaintext and 2 ciphertexts:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pt1 = I_do_not_like_ponies</span><br><span class="line">ct1 = D058DECB037A10916E9D8B0E5345BB381AE8D8EE</span><br><span class="line">ct2 = D049E9DF182420AB5EC6BD101229940517B59CE0</span><br></pre></td></tr></table></figure>
+<p>All the strings had the same length, we simply had to convert the <code>pt1</code> to its hexadecimal representation <code>495F646F5F6E6F745F6C696B655F706F6E696573</code> to also get a length of 40. We had one plaintext, which was encrypted with a key and resulted to one of the cipher text. The flag was most likely the second plaintext (<code>pt2</code>), which is unknown.</p>
+<p>To solve the challenge there is the <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Stream_cipher_attacks#Reused_key_attack">reused key attack</a> on stream ciphers, such as RC4. To explain is shortly, XORing both cipher texts will remove the key, which then results to the same when XORing the both plaintexts. So for the challenge:</p>
+<blockquote>
+<p>$ct1 \oplus ct2$ &#x3D; $pt1 \oplus pt2$</p>
+</blockquote>
+<p>So to get <code>pt2</code> we simply need to:</p>
+<ul>
+<li>Take every time 2 characters from both <code>ct1</code> and <code>ct2</code></li>
+<li>Convert them to a hexadecimal number</li>
+<li>XOR them together to get a <code>result</code></li>
+<li>Get 2 characters from <code>pt1</code></li>
+<li>Find a hexadecimal number that, if XORed with the 2 characters taken from <code>pt1</code>, leads to the same <code>result</code></li>
+<li>Append the character corresponding to that value to a <code>flag</code> variable.</li>
+</ul>
+<p>I ended up making the following Python script:</p>
+<figure class="highlight python"><figcaption><span>RC4 bruteforcer</span><a target="_blank" rel="noopener" href="https://gist.github.com/kkrypt0nn/b59f814cc800a402ab510a693efcda6c">rc4.py</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">pt1 = <span class="string">&quot;495F646F5F6E6F745F6C696B655F706F6E696573&quot;</span></span><br><span class="line">ct1 = <span class="string">&quot;D058DECB037A10916E9D8B0E5345BB381AE8D8EE&quot;</span></span><br><span class="line">ct2 = <span class="string">&quot;D049E9DF182420AB5EC6BD101229940517B59CE0&quot;</span></span><br><span class="line"></span><br><span class="line">flag = <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(ct1) - <span class="number">1</span>, <span class="number">2</span>):</span><br><span class="line">    ct1_pair = <span class="built_in">int</span>(<span class="string">&quot;0x&quot;</span> + ct1[i:i+<span class="number">2</span>], <span class="number">16</span>) <span class="comment"># Get two characters from ct1</span></span><br><span class="line">    ct2_pair = <span class="built_in">int</span>(<span class="string">&quot;0x&quot;</span> + ct2[i:i+<span class="number">2</span>], <span class="number">16</span>) <span class="comment"># Get two characters from ct2</span></span><br><span class="line">    result = ct1_pair ^ ct2_pair</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span> (<span class="number">0x0</span>, <span class="number">0x7f</span>): <span class="comment"># Loop over all characters in the ASCII table</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">int</span>(<span class="string">&quot;0x&quot;</span> + pt1[i:i+<span class="number">2</span>], <span class="number">16</span>) ^ k) == result: <span class="comment"># Check if the XORed number is the same as the result</span></span><br><span class="line">            flag += <span class="built_in">chr</span>(k)</span><br><span class="line">            <span class="built_in">print</span>(flag, end=<span class="string">&quot;\r&quot;</span>)</span><br><span class="line">            time.sleep(<span class="number">0.5</span>) <span class="comment"># That is just to look cool 😎</span></span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<p>This resulted in the following flag: <code>INS&#123;D0_No7_u<span>$</span>3_Rc4!&#125;</code></p>
+<h2 id="🔮-Magic-Words-7-points"><a href="#🔮-Magic-Words-7-points" class="headerlink" title="🔮 Magic Words - 7 points"></a>🔮 Magic Words - 7 points</h2><p>For this challenge we were given a link to a website. The website asked for a sentence, so basically we had to get this sentence. When looking at the source code there was some checks, so the first thing to do was to create the same file on the local machine.<br>Then simply take each check one by one and get the words in each paragraph. Then recreate the checks locally and execute the script.</p>
+<figure class="highlight js"><figcaption><span>Find the magic words</span><a target="_blank" rel="noopener" href="https://gist.github.com/kkrypt0nn/8743a257eed02449857313a819632bdc">magic_words.js</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// More code above...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// This is the needed code</span></span><br><span class="line">p1 = <span class="string">&#x27;Later, on my walk, I wondered why I felt I had to be suspicious of ‘normality’. The striking thing about the normal is that there is nothing normal about it: normality is the gentrification of ordinary madness – ask an Surrealist. In analysis ‘the normal child’ is often synonymous with the obedient good child, the one who only wants to please parents and develops what Winnicott called ‘a false self’&#x27;</span>;</span><br><span class="line">p2 = <span class="string">&#x27;In the hospital men’s room, as I’m washing my hands, I glance in the mirror. The man I see is not so much me as my father. When did he show up? There is no soap; I rub hand sanitizer into my face–it burns. I nearly drown myself in the sink trying to rinse it off.&#x27;</span>;</span><br><span class="line">p3 = <span class="string">&#x27;Your only chance of survival, if you are sincerely smitten, lies in hiding this fact from the woman you love, of feigning a casual detachment under all circumstances. What sadness there is in this simple observation! What an accusation against man! However, it had never occurred to me to contest this law, nor to imagine disobeying it: love makes you weak, and the weaker of the two is oppressed, tortured and finally killed by the other, who in his or her turn oppresses, tortures and kills without having evil intentions, without even getting pleasure from it, with complete indifference; that’s what men, normally, call love.&#x27;</span>;</span><br><span class="line">p4 = <span class="string">&#x27;Looking back on those incidents, he was always appalled by the memory of his passivity, hard though it was to see what else he could have done. He could have refused to pay for such gravy damage to his room, could have refused to change his shoes, could have refused to kneel to supplicate for his B.A.&#x27;</span>;</span><br><span class="line">p5 = <span class="string">&#x27;The way he went after that plump sister in the lace tucker, was an outrage on the credulity of human nature. Knocking down the fire-irons, tumbling over the chairs, bumping against the piano, smothering himself among the curtains, wherever she went, there went he. He always knew where the plump sister was. He wouldn’t catch anybody else. If you had fallen up against him (as some of them did), on purpose, he would have made a feint of endeavouring to seize you, which would have been an affront to your understanding, and would instantly have sidled off in the direction of the plump sister. She often cried out that it wasn’t fair; and it really was not.&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> response = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> words = p1.<span class="title function_">split</span>(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; words.<span class="property">length</span>; i += <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (words[i] == <span class="string">&#x27;please&#x27;</span>) response += words[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> words = p2.<span class="title function_">split</span>(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; words.<span class="property">length</span>; i += <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">beautify</span>(words[i]) == <span class="string">&#x27;siqz&#x27;</span>) response += <span class="string">&#x27; &#x27;</span> + words[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> words = p3.<span class="title function_">split</span>(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; words.<span class="property">length</span>; i += <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">uglify</span>(words[i]) == <span class="string">&#x27;MDA=&#x27;</span>) response += <span class="string">&#x27; &#x27;</span> + words[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> words = p4.<span class="title function_">split</span>(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; words.<span class="property">length</span>; i += <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">digitalize</span>(words[i]) == <span class="string">&#x27;746865&#x27;</span>) response += <span class="string">&#x27; &#x27;</span> + words[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> words = p5.<span class="title function_">split</span>(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; words.<span class="property">length</span>; i += <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">mystify</span>(words[i]) == <span class="string">&#x27;c83b72dd001482ce10f0b106c7a0ed0e&#x27;</span>) response += <span class="string">&#x27; &#x27;</span> + words[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(response);</span><br></pre></td></tr></table></figure>
+<p>Then the result was <code>please show of if in of is in an it to me to to of is by in or the way</code>. There was just to find a good word that would fit in the sentence for <code>pleas show [of if in of is in an it to me to to of is by in or] the way</code>, the best is definitely <code>please show me the way</code>.</p>
+<p>When submitting that, the flag (<code>INS&#123;jQu3ry_1<span>$</span>_Fr3@kiNg_C0oL&#125;</code>) was given as response.</p>
+<h2 id="👋-Welcome-challenge-6-points"><a href="#👋-Welcome-challenge-6-points" class="headerlink" title="👋 Welcome challenge - 6 points"></a>👋 Welcome challenge - 6 points</h2><p>We get a link to a GitLab repository where there are instructions to follow to actually solve the challenge which included commiting changes.<br>After folowing the steps the first time my shell looked kind of, weird:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">You are infected 🧟 $</span><br></pre></td></tr></table></figure>
+<p>But I wasn’t the only one who got this joke:</p>
+<img alt="The staff was building a botnet, no worries" src="welcome.png"><span class="image-caption">The staff was building a botnet, no worries</span>
+
+<p>After checking where this came from, it was located in <code>inso/.circleci/pre-commit</code>, there also was a <code>exec $SHELL</code> command at the end of the file, to make sure you see that. By simply removing the lines that changed my <code>PS1</code> variable and removing the <code>exec $SHELL</code> command, I was able to get the flag in return.<br>The flag was given with a response to a failed commit like the following: <code>remote: INS&#123;S0_F4r_S0_g00d&#125;</code>.</p>
+
+        </div>
+        <br>
+        <a style="background-image: none" target="_blank" rel="noopener" href="https://patreon.com/bePatron?u=50703556"><img class="donation-button" src="https://img.shields.io/badge/Become_a_patron-F96854?style=for-the-badge&logo=patreon&logoColor=white" /></a>
+        <a style="background-image: none" target="_blank" rel="noopener" href="https://ko-fi.com/kkrypt0nn"><img class="donation-button" src="https://img.shields.io/badge/Buy_me_a_coffee-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" /></a><br><br>
+</article>
+<script src="https://giscus.app/client.js"
+        data-repo="kkrypt0nn/krypton.ninja"
+        data-repo-id="R_kgDOHEsRjg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOHEsRjs4CPXH5"
+        data-mapping="title"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+    
+        <div id="footer-post-container">
+    <div id="footer-post">
+
+        <div id="nav-footer" style="display: none">
+            <ul>
+                
+                    <li><a href="/">~/</a></li>
+                
+                    <li><a href="/about/">~/about</a></li>
+                
+                    <li><a href="/archives/">~/posts</a></li>
+                
+                    <li><a href="/supporters/">~/supporters</a></li>
+                
+                    <li><a href="/ctfs/">~/ctfs</a></li>
+                
+                    <li><a href="/search/">~/search</a></li>
+                
+                    <li><a href="/atom.xml">~/rss</a></li>
+                
+            </ul>
+        </div>
+
+        <div id="toc-footer" style="display: none">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%90%9B-GDBug-120-points"><span class="toc-number">1.</span> <span class="toc-text">🐛 GDBug - 120 points</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A4%96-Bot-Telegram-75-points"><span class="toc-number">2.</span> <span class="toc-text">🤖 Bot Telegram - 75 points</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%85%B0%EF%B8%8F-Wordle-9-points"><span class="toc-number">3.</span> <span class="toc-text">🅰️ Wordle - 9 points</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%8A-Weak-Rivest-4-7-points"><span class="toc-number">4.</span> <span class="toc-text">🌊 Weak Rivest 4 - 7 points</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%AE-Magic-Words-7-points"><span class="toc-number">5.</span> <span class="toc-text">🔮 Magic Words - 7 points</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%91%8B-Welcome-challenge-6-points"><span class="toc-number">6.</span> <span class="toc-text">👋 Welcome challenge - 6 points</span></a></li></ol>
+        </div>
+
+        <div id="share-footer" style="display: none">
+            <ul>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://www.facebook.com/sharer.php?u=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/"><i
+                    class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/&text=🚩 Insomni&#39;hack 2022 CTF write-up"><i
+                    class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://www.linkedin.com/shareArticle?url=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/&title=🚩 Insomni&#39;hack 2022 CTF write-up"><i
+                    class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/&is_video=false&description=🚩 Insomni&#39;hack 2022 CTF write-up"><i
+                    class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" href="mailto:?subject=🚩 Insomni&#39;hack 2022 CTF write-up&body=Check out this article: https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/"><i
+                    class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/&title=🚩 Insomni&#39;hack 2022 CTF write-up"><i
+                    class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://reddit.com/submit?url=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/&title=🚩 Insomni&#39;hack 2022 CTF write-up"><i
+                    class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://www.stumbleupon.com/submit?url=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/&title=🚩 Insomni&#39;hack 2022 CTF write-up"><i
+                    class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://digg.com/submit?url=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/&title=🚩 Insomni&#39;hack 2022 CTF write-up"><i
+                    class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://www.tumblr.com/share/link?url=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/&name=🚩 Insomni&#39;hack 2022 CTF write-up&description="><i
+                    class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://krypton.ninja/2022/03/28/Insomnihack-2022-CTF-write-up/&t=🚩 Insomni&#39;hack 2022 CTF write-up"><i
+                    class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+        </div>
+
+        <div id="actions-footer">
+            <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i
+                        class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+            <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i
+                        class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+            <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i
+                        class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+            <a id="top" style="display:none" class="icon" href="#"
+               onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg"
+                                                                               aria-hidden="true"></i> Top
+            </a>
+        </div>
+
+    </div>
+</div>
+
+    
+    <footer id="footer">
+    <div class="footer-left">
+        Copyright &copy;
+        
+        
+        2022
+        Krypton
+    </div>
+    <div class="footer-right">
+        <nav>
+            <ul>
+                
+                    <li><a href="/">~/</a></li>
+                
+                    <li><a href="/about/">~/about</a></li>
+                
+                    <li><a href="/archives/">~/posts</a></li>
+                
+                    <li><a href="/supporters/">~/supporters</a></li>
+                
+                    <li><a href="/ctfs/">~/ctfs</a></li>
+                
+                    <li><a href="/search/">~/search</a></li>
+                
+                    <li><a href="/atom.xml">~/rss</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+</div>
+<!-- styles -->
+
+
+
+    <link
+            rel="preload"
+            href="/lib/font-awesome/css/all.min.css"
+            as="style"
+            onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript
+    >
+        <link
+                rel="stylesheet"
+                href="/lib/font-awesome/css/all.min.css"
+        />
+    </noscript>
+
+
+<!-- JQuery -->
+
+    
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<!-- Clipboard -->
+
+    
+        
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+    
+    <script type="text/javascript">
+        $(function () {
+            // copy-btn HTML
+            var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+            btn += '<i class="far fa-clone"></i>';
+            btn += '</span>';
+            // mount it!
+            $(".highlight table").before(btn);
+            var clip = new ClipboardJS('.btn-copy', {
+                text: function (trigger) {
+                    return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str, it) => str + it.innerText + '\n', '')
+                }
+            });
+            clip.on('success', function (e) {
+                e.trigger.setAttribute('aria-label', "Copied!");
+                e.clearSelection();
+            })
+        })
+    </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- Display Spotify Now Playing -->
+
+<!-- Display Discord status as border around avatar -->
+
+<!-- Search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-205526455-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'UA-205526455-1');
+    </script>
+
+<!-- Firebase -->
+
+    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+    <script>
+	(function() {
+		var title = '🚩 Insomni&#39;hack 2022 CTF write-up'
+		if (title && ('true' === "true")) {
+			firebase.initializeApp({
+				apiKey: 'AIzaSyDfEjW5zUc5P2mTghIDVurxg7AVgK2YskQ',
+				projectId: 'krypton-blog'
+			})
+
+
+			var db = firebase.firestore()
+			var articles = db.collection('posts')
+			var doc = articles.doc(title)
+
+			doc.get().then(function(d){
+				var count
+				if (!d.exists) {
+					doc.set({
+						count: 1
+					})
+					count=1
+				}
+				else {
+					count = d.data().count
+					if (!(window.localStorage&&window.localStorage.getItem(title))) {
+                        doc.set({
+                            count: count+1
+                        })
+                        count++
+					}
+				}
+                if (window.localStorage) {
+                    localStorage.setItem(title, true)
+                }
+                document.getElementById("views").textContent = count + (count > 1 ? ' views' : ' view')
+			})
+		}
+	})()
+</script>
+
+</body>
+</html>

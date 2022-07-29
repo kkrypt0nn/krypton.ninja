@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"/>
+    <meta name="theme-color" content="#9C84EF">
+    
+    <meta name="og:image" content="https://krypton.ninja/2021/10/16/What-is-Go/Banner.webp">
+    <meta name="og:image:width" content="1000">
+    <meta name="og:image:height" content="420">
+    <meta name="description" content="When I first read about Go and what it offers I decided to start and learn it. After some time I realized it has some amazing potential, and I wanted to share it here with you. Note that this is jus">
+<meta property="og:type" content="article">
+<meta property="og:title" content="❔ What is Go?">
+<meta property="og:url" content="https://krypton.ninja/2021/10/16/What-is-Go/index.html">
+<meta property="og:site_name" content="Krypton">
+<meta property="og:description" content="When I first read about Go and what it offers I decided to start and learn it. After some time I realized it has some amazing potential, and I wanted to share it here with you. Note that this is jus">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://krypton.ninja/2021/10/16/What-is-Go/Banner.webp">
+<meta property="og:image" content="https://krypton.ninja/2021/10/16/What-is-Go/Webserver.png">
+<meta property="og:image" content="https://krypton.ninja/2021/10/16/What-is-Go/Gophers.jpg">
+<meta property="article:published_time" content="2021-10-16T15:33:25.000Z">
+<meta property="article:modified_time" content="2022-07-28T18:35:02.251Z">
+<meta property="article:author" content="Krypton">
+<meta property="article:tag" content="go">
+<meta property="article:tag" content="golang">
+<meta property="article:tag" content="learning">
+<meta property="article:tag" content="what is">
+<meta property="article:tag" content="google">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://krypton.ninja/2021/10/16/What-is-Go/Banner.webp">
+    
+    
+    
+    
+        
+            
+                
+                    <link rel="shortcut icon" href="https://www.gravatar.com/avatar/b15cc9bf5e4b3090dd8d77b7c907718d?s=48">
+                
+            
+        
+        
+            
+                
+                    <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/b15cc9bf5e4b3090dd8d77b7c907718d?s=192" sizes="192x192">
+                
+            
+        
+        
+            
+                
+                    <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/b15cc9bf5e4b3090dd8d77b7c907718d?s=180">
+                
+            
+        
+    
+    <!-- title -->
+    <title>❔ What is Go?</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+        <link rel="alternate" href="/atom.xml" title="Krypton" type="application/atom+xml"/>
+    
+    <!-- mathjax -->
+    
+        <script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+
+        </script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML'
+                async></script>
+    
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+
+    <div id="header-post">
+    <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 },
+    'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+    <span id="menu">
+    <span id="nav">
+      <ul>
+          
+              <li><a href="/">~/</a></li>
+          
+              <li><a href="/about/">~/about</a></li>
+          
+              <li><a href="/archives/">~/posts</a></li>
+          
+              <li><a href="/supporters/">~/supporters</a></li>
+          
+              <li><a href="/ctfs/">~/ctfs</a></li>
+          
+              <li><a href="/search/">~/search</a></li>
+          
+              <li><a href="/atom.xml">~/rss</a></li>
+          
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+          
+              <li><a class="icon" aria-label="Previous post "
+                     href="/2022/01/30/How-I-protected-my-Minecraft-cheating-client/"><i class="fas fa-chevron-left" aria-hidden="true"
+                                                              onmouseover="$('#i-prev').toggle();"
+                                                              onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+          
+              <li><a class="icon" aria-label="Next post " href="/2021/08/23/How-cookies-can-manipulate-new-customers/"><i
+                              class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                              onmouseout="$('#i-next').toggle();"></i></a></li>
+          
+          <li><a class="icon" aria-label="Back to top " href="#"
+                 onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up"
+                                                                                 aria-hidden="true"
+                                                                                 onmouseover="$('#i-top').toggle();"
+                                                                                 onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt"
+                                                                                      aria-hidden="true"
+                                                                                      onmouseover="$('#i-share').toggle();"
+                                                                                      onmouseout="$('#i-share').toggle();"
+                                                                                      onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://www.facebook.com/sharer.php?u=https://krypton.ninja/2021/10/16/What-is-Go/"><i
+                    class="fab fa-facebook " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://krypton.ninja/2021/10/16/What-is-Go/&text=❔ What is Go?"><i
+                    class="fab fa-twitter " aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://www.linkedin.com/shareArticle?url=https://krypton.ninja/2021/10/16/What-is-Go/&title=❔ What is Go?"><i
+                    class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://krypton.ninja/2021/10/16/What-is-Go/&is_video=false&description=❔ What is Go?"><i
+                    class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+    <li><a class="icon" href="mailto:?subject=❔ What is Go?&body=Check out this article: https://krypton.ninja/2021/10/16/What-is-Go/"><i
+                    class="fas fa-envelope " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://krypton.ninja/2021/10/16/What-is-Go/&title=❔ What is Go?"><i
+                    class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://reddit.com/submit?url=https://krypton.ninja/2021/10/16/What-is-Go/&title=❔ What is Go?"><i
+                    class="fab fa-reddit " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://www.stumbleupon.com/submit?url=https://krypton.ninja/2021/10/16/What-is-Go/&title=❔ What is Go?"><i
+                    class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://digg.com/submit?url=https://krypton.ninja/2021/10/16/What-is-Go/&title=❔ What is Go?"><i
+                    class="fab fa-digg " aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://www.tumblr.com/share/link?url=https://krypton.ninja/2021/10/16/What-is-Go/&name=❔ What is Go?&description="><i
+                    class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://krypton.ninja/2021/10/16/What-is-Go/&t=❔ What is Go?"><i
+                    class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%9C-About-Go"><span class="toc-number">1.</span> <span class="toc-text">📜 About Go</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A4%94-Why-has-Go-been-created"><span class="toc-number">2.</span> <span class="toc-text">🤔 Why has Go been created?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%96%EF%B8%8F-Why-is-Go-%E2%80%9Cso-good%E2%80%9D"><span class="toc-number">3.</span> <span class="toc-text">🎖️ Why is Go “so good”?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A4%AF-How-hard-is-Go"><span class="toc-number">4.</span> <span class="toc-text">🤯 How hard is Go?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%91%8B-A-%E2%80%9CHello-world-%E2%80%9D-in-Go"><span class="toc-number">5.</span> <span class="toc-text">👋 A “Hello world!” in Go</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%90-Did-I-hear-web-server"><span class="toc-number">6.</span> <span class="toc-text">🌐 Did I hear web server?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A5%88-What-is-Go%E2%80%99s-concurrency"><span class="toc-number">7.</span> <span class="toc-text">🥈 What is Go’s concurrency?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Goroutines"><span class="toc-number">7.1.</span> <span class="toc-text">Goroutines</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Channels"><span class="toc-number">7.2.</span> <span class="toc-text">Channels</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%B3-Does-Go-have-objects"><span class="toc-number">8.</span> <span class="toc-text">🌳 Does Go have objects?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Structs"><span class="toc-number">8.1.</span> <span class="toc-text">Structs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Implicit-inheritance"><span class="toc-number">8.2.</span> <span class="toc-text">Implicit inheritance</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%98%8E-Popular-open-source-projects"><span class="toc-number">9.</span> <span class="toc-text">😎 Popular open-source projects</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8F%AB-How-do-I-get-started"><span class="toc-number">10.</span> <span class="toc-text">🏫 How do I get started?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Installation"><span class="toc-number">10.1.</span> <span class="toc-text">Installation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Learning-resources"><span class="toc-number">10.2.</span> <span class="toc-text">Learning resources</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+
+<div class="content index py4">
+    
+    <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
+    <header>
+        
+    <h1 class="posttitle" itemprop="name headline">
+        ❔ What is Go?
+    </h1>
+
+
+
+            <div class="meta">
+                <span class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                
+                    
+                        <div class="author-logo" style="background-image: url(https://www.gravatar.com/avatar/b15cc9bf5e4b3090dd8d77b7c907718d);"></div>
+                    
+                
+                <span id="name" itemprop="name">
+                    <a href="/">Krypton</a>
+                </span>
+                </span> @
+                
+    <div class="postdate">
+        
+            <time datetime="2021-10-16T15:33:25.000Z"
+                  itemprop="datePublished">October 16, 2021</time>
+            
+        
+    </div>
+
+
+                    <div>
+    <i class="fas fa-clock"></i>
+    11 min. read | 
+                            <i class="fas fa-eye"></i>
+    <span id="views">1337 views</span>
+</div>
+                            
+
+                                
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/go/" rel="tag">go</a>, <a class="tag-link-link" href="/tags/golang/" rel="tag">golang</a>, <a class="tag-link-link" href="/tags/google/" rel="tag">google</a>, <a class="tag-link-link" href="/tags/learning/" rel="tag">learning</a>, <a class="tag-link-link" href="/tags/what-is/" rel="tag">what is</a>
+    </div>
+
+
+            </div>
+    </header>
+    
+
+        <div class="content" itemprop="articleBody">
+            <img src="Banner.webp"/>
+
+<p>When I first read about Go and what it offers I decided to start and learn it. After some time I realized it has some amazing potential, and I wanted to share it here with you. Note that this is just a short blog post to show and explain what Go is and how it works, it’s not supposed to be a Wikipedia article 😉</p>
+<h2 id="📜-About-Go"><a href="#📜-About-Go" class="headerlink" title="📜 About Go"></a>📜 About Go</h2><p>Go is a statically typed and compiled programming language. Go is designed at Google by Robert Griesemer, Rob Pike, and Ken Thompson. Syntactically Go is very similar to C, but it has memory safety, garbage collection, structural typing and many other advantages. It’s an easy language for developers to learn quickly.</p>
+<h2 id="🤔-Why-has-Go-been-created"><a href="#🤔-Why-has-Go-been-created" class="headerlink" title="🤔 Why has Go been created?"></a>🤔 Why has Go been created?</h2><p>Go was intended as a language for writing server programs that would be easy to maintain over time. It’s now being used for writing light-weight microservices and is being used for generating APIs that will later on interact with the front-end. So in short words I could say that it was mainly created for APIs, web servers, frameworks for web applications, etc.</p>
+<h2 id="🎖️-Why-is-Go-“so-good”"><a href="#🎖️-Why-is-Go-“so-good”" class="headerlink" title="🎖️ Why is Go “so good”?"></a>🎖️ Why is Go <em>“so good”</em>?</h2><p>Its easy concurrency is really easy to make and include in your projects. As you may know, network applications are really dependent of concurrency, and that’s why Go’s networking features makes it even easier and better.<br><br>When declaring interfaces in Go, you don’t need to add like in other language the keyword <code>implements</code> or anything similar. Which means we can create an interface and simply make another object implement it, we simply need to make sure that all the methods from the interface are in the object implementing it, just like any other language.<br><br>When looking at <a target="_blank" rel="noopener" href="https://pkg.go.dev/std">Go’s standard library</a> we can see that we don’t always specifically need to get a third-party library. It goes from parsing flags when executing your program to testing.<br><br>Since Go get compiled into machine code, we need a compiler. For Go, the compilation time is quite fast compared to some other languages, one reason for that is that Go does not allow unused imports. If you want a comparison to another language, Go is significantly faster than C++ at compilation time, however it also results in Go’s binary to be bigger in terms of size.<br><br>And as always, who does not like programming languages that are cross-platform? Well, Go got you covered for that, from Android to Linux to Windows, just run <code>go tool dist list</code> in your terminal to see it.</p>
+<h2 id="🤯-How-hard-is-Go"><a href="#🤯-How-hard-is-Go" class="headerlink" title="🤯 How hard is Go?"></a>🤯 How hard is Go?</h2><p>This is a question you often get asked when you learn a new programming language and other people you know may want to learn it. For Go, it’s a simple answer because the language itself is simple. Go’s syntax is quite small compared to many other languages and therefore easier to remember. Most of the things can be remembered quite easily and this means you won’t need to spend a lot of time at looking things up. You can start taking a look at Go <a target="_blank" rel="noopener" href="https://tour.golang.org/">here</a>.</p>
+<h2 id="👋-A-“Hello-world-”-in-Go"><a href="#👋-A-“Hello-world-”-in-Go" class="headerlink" title="👋 A “Hello world!” in Go"></a>👋 A “Hello world!” in Go</h2><p>A hello world is often included when you explain what a language is, so here it is:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;Hello world!&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="🌐-Did-I-hear-web-server"><a href="#🌐-Did-I-hear-web-server" class="headerlink" title="🌐 Did I hear web server?"></a>🌐 Did I hear web server?</h2><p>Correct! Go is widely used for web servers and&#x2F;or APIs. This can go from a very basic REST API to using Websockets. In comparison to other languages, Go does not need some overcomplicated web framework, Go’s standard library already has this implemented and ready for us. Of course there are third party libraries that implements some additions.</p>
+<p>To create a very basic web server we need to import two default libraries like the following:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span> <span class="comment">// This is to give output when requesting a page (also used in the hello world example)</span></span><br><span class="line">    <span class="string">&quot;net/http&quot;</span> <span class="comment">// This is needed to handle requests, etc.</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>Now we can create a simple handler that will listen to the port <code>1337</code> and register a new <code>/hello</code> route.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">helloWorld</span><span class="params">(response http.ResponseWriter, request *http.Request)</span></span> &#123;</span><br><span class="line">    fmt.Fprintf(response, <span class="string">&quot;Hello from the Gopher side!&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    http.HandleFunc(<span class="string">&quot;/hello&quot;</span>, helloWorld)</span><br><span class="line">    http.ListenAndServe(<span class="string">&quot;:1337&quot;</span>, <span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Now run the code with <code>go run main.go</code> and go to <a target="_blank" rel="noopener" href="http://127.0.0.1:1337/hello">127.0.0.1:1337&#x2F;hello</a>.</p>
+<img src="Webserver.png" alt="As you can see the web server works like a charm!"/><span class="image-caption">As you can see the web server works like a charm!</span>
+
+<p>In around 3-7 lines of code we managed to start a web server and create a route that will display some text.<br><br>Now it’s up to you to make your creative projects :)</p>
+<h2 id="🥈-What-is-Go’s-concurrency"><a href="#🥈-What-is-Go’s-concurrency" class="headerlink" title="🥈 What is Go’s concurrency?"></a>🥈 What is Go’s concurrency?</h2><h3 id="Goroutines"><a href="#Goroutines" class="headerlink" title="Goroutines"></a>Goroutines</h3><p>Python developers may know what <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/asyncio-task.html">coroutines</a> are, however to include them in your project you need an additional library called <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/asyncio.html">asyncio</a>. Yes that’s not a big deal as most of the Python features relies on libraries anyways.</p>
+<p>The difference with Go, is that you can easily create a so called <strong>Goroutine</strong> to make functions run concurrently. Here’s a very easy example on how to create a Goroutine:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">echo</span><span class="params">(s <span class="type">string</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">5</span>; i++ &#123;</span><br><span class="line">        time.Sleep(<span class="number">100</span> * time.Millisecond)</span><br><span class="line">        fmt.Println(s)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">go</span> echo(<span class="string">&quot;world&quot;</span>)</span><br><span class="line">    echo(<span class="string">&quot;Hello&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>As you may notice, I just had to add the keyword <code>go</code> before calling the function to turn the function into a Goroutine. And of course I can call the <code>echo()</code> function without having to mark it as a Goroutine. After running the code, here is a sample output I got:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Hello</span><br><span class="line">world</span><br><span class="line">world</span><br><span class="line">Hello</span><br><span class="line">world</span><br><span class="line">Hello</span><br><span class="line">Hello</span><br><span class="line">world</span><br><span class="line">world</span><br><span class="line">Hello</span><br></pre></td></tr></table></figure>
+<p>You can clearly see, that the <code>echo(&quot;Hello&quot;)</code> method runs without having to wait for the Goroutine to end, this is concurrency.</p>
+<h3 id="Channels"><a href="#Channels" class="headerlink" title="Channels"></a>Channels</h3><p>What makes Go’s concurrency different and unique from different languages are so called <strong>channels</strong>. You can see channels as being pipes that transfer data. This is used to send values and data from one goroutine to another one, or just to get data back from a goroutine.<br>Take this example:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum</span><span class="params">(list []<span class="type">int</span>, channel <span class="keyword">chan</span> <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">    sum := <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> _, value := <span class="keyword">range</span> list &#123;</span><br><span class="line">        sum += value</span><br><span class="line">    &#125;</span><br><span class="line">    channel &lt;- sum <span class="comment">// Here we send the sum to the channel</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    list1 := []<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line">    list2 := []<span class="type">int</span>&#123;<span class="number">9</span>, <span class="number">8</span>, <span class="number">7</span>&#125;</span><br><span class="line"></span><br><span class="line">    channel := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>) <span class="comment">// Here we create a channel that accepts integers</span></span><br><span class="line">    <span class="keyword">go</span> sum(list1, channel)</span><br><span class="line">    <span class="keyword">go</span> sum(list2, channel)</span><br><span class="line">    x := &lt;-channel <span class="comment">// Here we receive data from the channel</span></span><br><span class="line">    y := &lt;-channel</span><br><span class="line"></span><br><span class="line">    fmt.Println(x, y, x+y) <span class="comment">// Output: 24 6 30</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This small example simply sums the numbers from a slice and puts the work between two goroutines so that they are being calculated concurrently and is therefore faster. Once both goroutines gave their output, it will calculate the final result and print it in the console. The arrows such as <code>&lt;-</code> simply describe from where to where the data goes, so either from the channel to the variable or from the variable in the channel.</p>
+<h2 id="🌳-Does-Go-have-objects"><a href="#🌳-Does-Go-have-objects" class="headerlink" title="🌳 Does Go have objects?"></a>🌳 Does Go have objects?</h2><p>Of course! There’s just one slight difference here. Go doesn’t directly have a type <em><code>object</code></em>, but they have a type that matches the definition of a data structure that integrates both code and behavior. It’s called a <em><code>struct</code></em>. Let me show you a very simple example.</p>
+<h3 id="Structs"><a href="#Structs" class="headerlink" title="Structs"></a>Structs</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Rectangle <span class="keyword">struct</span> &#123;</span><br><span class="line">    Width  <span class="type">int</span></span><br><span class="line">    Height <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// The &#x27;(rect *Rectangle)&#x27; before the method name shows to which object the method will operate, in this case the &#x27;rectangle&#x27; object.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rect *Rectangle)</span></span> Area() <span class="type">int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> rect.Width * rect.Height</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    rect := Rectangle&#123;Width: <span class="number">10</span>, Height: <span class="number">5</span>&#125;</span><br><span class="line">    <span class="comment">// As expected, the output is 50.</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;Area: &quot;</span>, rect.Area())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Implicit-inheritance"><a href="#Implicit-inheritance" class="headerlink" title="Implicit inheritance"></a>Implicit inheritance</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Shape <span class="keyword">interface</span> &#123;</span><br><span class="line">    Area() <span class="type">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Rectangle <span class="keyword">struct</span> &#123;</span><br><span class="line">    Width  <span class="type">float64</span></span><br><span class="line">    Height <span class="type">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rect Rectangle)</span></span> Area() <span class="type">float64</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> rect.Width * rect.Height</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> s Shape = Rectangle&#123;Width: <span class="number">10</span>, Height: <span class="number">50</span>&#125;</span><br><span class="line">    fmt.Println(s.Area())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>As you can see from the example above, the struct <code>Rectangle</code> implements the interface <code>Shape</code> but nowhere in the code it’s clearly written, that it implements it.</p>
+<h2 id="😎-Popular-open-source-projects"><a href="#😎-Popular-open-source-projects" class="headerlink" title="😎 Popular open-source projects"></a>😎 Popular open-source projects</h2><p>As you might have expected, there are some really popular projects that are using Go. Here is just a small list among a lot of other projects:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/docker/compose">Docker Compose</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/coreos/coreos-assembler">Fedora CoreOS</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/gohugoio/hugo">Hugo</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/kubernetes/kubernetes">Kubernetes</a></li>
+</ul>
+<h2 id="🏫-How-do-I-get-started"><a href="#🏫-How-do-I-get-started" class="headerlink" title="🏫 How do I get started?"></a>🏫 How do I get started?</h2><img src="Gophers.jpg" alt="Be part of the Gophers :D"/><span class="image-caption">Be part of the Gophers :D</span>
+
+<p>I’m glad you’re interested in learning more about Go by yourself!</p>
+<h3 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h3><p>The installation is really easy regardless of the operating system you have, simply go to the <a target="_blank" rel="noopener" href="https://golang.org/doc/install">download page</a> and follow the instructions. Oh and remember, Go works on every operating system!</p>
+<h3 id="Learning-resources"><a href="#Learning-resources" class="headerlink" title="Learning resources"></a>Learning resources</h3><p>I don’t really have specific learning resources but these are the things I’ve used to start to learn and code in Go:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://tour.golang.org/">A tour of Go</a></li>
+<li><a target="_blank" rel="noopener" href="https://codecademy.com/learn/learn-go">Codecademy</a></li>
+<li><a target="_blank" rel="noopener" href="https://golang.org/doc/effective_go">Effective Go</a></li>
+<li><a target="_blank" rel="noopener" href="https://golang.org/doc">Go’s Documentation</a></li>
+<li><a target="_blank" rel="noopener" href="https://gobyexample.com/">Go by Example</a></li>
+<li><a target="_blank" rel="noopener" href="https://sololearn.com/learning/1164">Sololearn</a> <em>(My favorite as you get a better overview of concurrency)</em></li>
+</ul>
+<p>I’d be happy to see you become part of the Gophers!</p>
+
+        </div>
+        <br>
+        <a style="background-image: none" target="_blank" rel="noopener" href="https://patreon.com/bePatron?u=50703556"><img class="donation-button" src="https://img.shields.io/badge/Become_a_patron-F96854?style=for-the-badge&logo=patreon&logoColor=white" /></a>
+        <a style="background-image: none" target="_blank" rel="noopener" href="https://ko-fi.com/kkrypt0nn"><img class="donation-button" src="https://img.shields.io/badge/Buy_me_a_coffee-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" /></a><br><br>
+</article>
+<script src="https://giscus.app/client.js"
+        data-repo="kkrypt0nn/krypton.ninja"
+        data-repo-id="R_kgDOHEsRjg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOHEsRjs4CPXH5"
+        data-mapping="title"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+    
+        <div id="footer-post-container">
+    <div id="footer-post">
+
+        <div id="nav-footer" style="display: none">
+            <ul>
+                
+                    <li><a href="/">~/</a></li>
+                
+                    <li><a href="/about/">~/about</a></li>
+                
+                    <li><a href="/archives/">~/posts</a></li>
+                
+                    <li><a href="/supporters/">~/supporters</a></li>
+                
+                    <li><a href="/ctfs/">~/ctfs</a></li>
+                
+                    <li><a href="/search/">~/search</a></li>
+                
+                    <li><a href="/atom.xml">~/rss</a></li>
+                
+            </ul>
+        </div>
+
+        <div id="toc-footer" style="display: none">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%9C-About-Go"><span class="toc-number">1.</span> <span class="toc-text">📜 About Go</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A4%94-Why-has-Go-been-created"><span class="toc-number">2.</span> <span class="toc-text">🤔 Why has Go been created?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%96%EF%B8%8F-Why-is-Go-%E2%80%9Cso-good%E2%80%9D"><span class="toc-number">3.</span> <span class="toc-text">🎖️ Why is Go “so good”?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A4%AF-How-hard-is-Go"><span class="toc-number">4.</span> <span class="toc-text">🤯 How hard is Go?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%91%8B-A-%E2%80%9CHello-world-%E2%80%9D-in-Go"><span class="toc-number">5.</span> <span class="toc-text">👋 A “Hello world!” in Go</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%90-Did-I-hear-web-server"><span class="toc-number">6.</span> <span class="toc-text">🌐 Did I hear web server?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A5%88-What-is-Go%E2%80%99s-concurrency"><span class="toc-number">7.</span> <span class="toc-text">🥈 What is Go’s concurrency?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Goroutines"><span class="toc-number">7.1.</span> <span class="toc-text">Goroutines</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Channels"><span class="toc-number">7.2.</span> <span class="toc-text">Channels</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%B3-Does-Go-have-objects"><span class="toc-number">8.</span> <span class="toc-text">🌳 Does Go have objects?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Structs"><span class="toc-number">8.1.</span> <span class="toc-text">Structs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Implicit-inheritance"><span class="toc-number">8.2.</span> <span class="toc-text">Implicit inheritance</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%98%8E-Popular-open-source-projects"><span class="toc-number">9.</span> <span class="toc-text">😎 Popular open-source projects</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8F%AB-How-do-I-get-started"><span class="toc-number">10.</span> <span class="toc-text">🏫 How do I get started?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Installation"><span class="toc-number">10.1.</span> <span class="toc-text">Installation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Learning-resources"><span class="toc-number">10.2.</span> <span class="toc-text">Learning resources</span></a></li></ol></li></ol>
+        </div>
+
+        <div id="share-footer" style="display: none">
+            <ul>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://www.facebook.com/sharer.php?u=https://krypton.ninja/2021/10/16/What-is-Go/"><i
+                    class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://krypton.ninja/2021/10/16/What-is-Go/&text=❔ What is Go?"><i
+                    class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://www.linkedin.com/shareArticle?url=https://krypton.ninja/2021/10/16/What-is-Go/&title=❔ What is Go?"><i
+                    class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://krypton.ninja/2021/10/16/What-is-Go/&is_video=false&description=❔ What is Go?"><i
+                    class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" href="mailto:?subject=❔ What is Go?&body=Check out this article: https://krypton.ninja/2021/10/16/What-is-Go/"><i
+                    class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://krypton.ninja/2021/10/16/What-is-Go/&title=❔ What is Go?"><i
+                    class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://reddit.com/submit?url=https://krypton.ninja/2021/10/16/What-is-Go/&title=❔ What is Go?"><i
+                    class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://www.stumbleupon.com/submit?url=https://krypton.ninja/2021/10/16/What-is-Go/&title=❔ What is Go?"><i
+                    class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://digg.com/submit?url=https://krypton.ninja/2021/10/16/What-is-Go/&title=❔ What is Go?"><i
+                    class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://www.tumblr.com/share/link?url=https://krypton.ninja/2021/10/16/What-is-Go/&name=❔ What is Go?&description="><i
+                    class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://krypton.ninja/2021/10/16/What-is-Go/&t=❔ What is Go?"><i
+                    class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+        </div>
+
+        <div id="actions-footer">
+            <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i
+                        class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+            <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i
+                        class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+            <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i
+                        class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+            <a id="top" style="display:none" class="icon" href="#"
+               onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg"
+                                                                               aria-hidden="true"></i> Top
+            </a>
+        </div>
+
+    </div>
+</div>
+
+    
+    <footer id="footer">
+    <div class="footer-left">
+        Copyright &copy;
+        
+        
+        2022
+        Krypton
+    </div>
+    <div class="footer-right">
+        <nav>
+            <ul>
+                
+                    <li><a href="/">~/</a></li>
+                
+                    <li><a href="/about/">~/about</a></li>
+                
+                    <li><a href="/archives/">~/posts</a></li>
+                
+                    <li><a href="/supporters/">~/supporters</a></li>
+                
+                    <li><a href="/ctfs/">~/ctfs</a></li>
+                
+                    <li><a href="/search/">~/search</a></li>
+                
+                    <li><a href="/atom.xml">~/rss</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+</div>
+<!-- styles -->
+
+
+
+    <link
+            rel="preload"
+            href="/lib/font-awesome/css/all.min.css"
+            as="style"
+            onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript
+    >
+        <link
+                rel="stylesheet"
+                href="/lib/font-awesome/css/all.min.css"
+        />
+    </noscript>
+
+
+<!-- JQuery -->
+
+    
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<!-- Clipboard -->
+
+    
+        
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+    
+    <script type="text/javascript">
+        $(function () {
+            // copy-btn HTML
+            var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+            btn += '<i class="far fa-clone"></i>';
+            btn += '</span>';
+            // mount it!
+            $(".highlight table").before(btn);
+            var clip = new ClipboardJS('.btn-copy', {
+                text: function (trigger) {
+                    return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str, it) => str + it.innerText + '\n', '')
+                }
+            });
+            clip.on('success', function (e) {
+                e.trigger.setAttribute('aria-label', "Copied!");
+                e.clearSelection();
+            })
+        })
+    </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- Display Spotify Now Playing -->
+
+<!-- Display Discord status as border around avatar -->
+
+<!-- Search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-205526455-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'UA-205526455-1');
+    </script>
+
+<!-- Firebase -->
+
+    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+    <script>
+	(function() {
+		var title = '❔ What is Go?'
+		if (title && ('true' === "true")) {
+			firebase.initializeApp({
+				apiKey: 'AIzaSyDfEjW5zUc5P2mTghIDVurxg7AVgK2YskQ',
+				projectId: 'krypton-blog'
+			})
+
+
+			var db = firebase.firestore()
+			var articles = db.collection('posts')
+			var doc = articles.doc(title)
+
+			doc.get().then(function(d){
+				var count
+				if (!d.exists) {
+					doc.set({
+						count: 1
+					})
+					count=1
+				}
+				else {
+					count = d.data().count
+					if (!(window.localStorage&&window.localStorage.getItem(title))) {
+                        doc.set({
+                            count: count+1
+                        })
+                        count++
+					}
+				}
+                if (window.localStorage) {
+                    localStorage.setItem(title, true)
+                }
+                document.getElementById("views").textContent = count + (count > 1 ? ' views' : ' view')
+			})
+		}
+	})()
+</script>
+
+</body>
+</html>
